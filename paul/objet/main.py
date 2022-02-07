@@ -53,6 +53,3 @@ screen = pygame.display.set_mode((1080, 720))
 game = Game(screen)  # instantiation de l'objet
 game.run()  # lancement du jeu
 pygame.quit()
-# clock = pygame.time.Clock()
-# x = 0
-# y = 0
