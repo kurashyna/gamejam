@@ -7,12 +7,14 @@ class Terrain:
         self.image = pygame.image.load(
             "assets/sprites/png/background/terrain.png")
         self.rect = self.image.get_rect(x=x, y=y)
-        self.obstacle = Obstacle(500, 300)
+        self.obstacles = [Obstacle(500, 300), Obstacle(200, 300)]
 
     def update(self, player):
         # detecte les collisions avec le joueur
-        self.obstacle.update(player)
+        for obstacle in self.obstacles:
+            obstacle.update(player)
 
     def draw(self, screen):
         screen.blit(self.image, self.rect)
-        self.obstacle.draw(screen)
+        for obstacle in self.obstacles:
+            obstacle.draw(screen)

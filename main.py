@@ -1,4 +1,5 @@
 import pygame
+from fruit import Fruit
 from player import Player
 from terrain import Terrain
 from obstacle import Obstacle
@@ -9,8 +10,9 @@ class Game:
         self.screen = screen
         self.running = True
         self.clock = pygame.time.Clock()
-        self.player = Player(0, 0)
+        self.player = Player(self, 0, 0)
         self.terrain = Terrain(0, 0)
+        self.fruits = [Fruit(self, 700, 200), Fruit(self, 300, 200)]
 
         # booleans used to prevent diagonal movement
         self.xIsPressed = False
@@ -21,15 +23,7 @@ class Game:
             # evenement retourné lorsque l'on clique sur la croix dans windows, fait sortir de la boucle et ainsi ferme le jeu
             if event.type == pygame.QUIT:
                 self.running = False
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_LEFT:
-                    self.player.velocity = [-1, 0]
-                if event.key == pygame.K_RIGHT:
-                    self.player.velocity = [1, 0]
-                if event.key == pygame.K_UP:
-                    self.player.velocity = [0, -1]
-                if event.key == pygame.K_DOWN:
-                    self.player.velocity = [0, 1]
+            self.player.handle_events(event)
 
         # # movement inputs
         # pressed = pygame.key.get_pressed()
@@ -56,14 +50,17 @@ class Game:
         #     yIsPressed = False
 
     def update(self):
-        self.player.move()
+        self.player.update()
         self.terrain.update(self.player)
+        for fruit in self.fruits:
+            fruit.update(self.player)
 
     def display(self):
         self.screen.fill((27, 27, 27))
         self.terrain.draw(self.screen)
         self.player.draw(self.screen)
-
+        for fruit in self.fruits:
+            fruit.draw(self.screen)
         pygame.display.flip()
 
     def run(self):  # methode run
