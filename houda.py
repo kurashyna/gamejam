@@ -5,7 +5,7 @@ pygame.init()
 screen= pygame.display.set_mode((800, 800))
 
 
-cat = pygame.image.load('cat.png').convert()
+cat = pygame.image.load('sprites\png\pear.png').convert()
 catX=0
 catY=100
 
