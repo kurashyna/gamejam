@@ -13,6 +13,8 @@ class Player:
         self.dashsAvailable = 0
         self.dashUseMoment = 0
         self.isDashing = False
+        self.maxHP = 8
+        self.currentHP = self.maxHP  # start with healthbar full
 
     def handle_events(self, event):
         if event.type == pygame.KEYDOWN:

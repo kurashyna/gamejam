@@ -1,5 +1,6 @@
 import pygame
 from fruit import Fruit
+from hud import HUD
 from player import Player
 from terrain import Terrain
 from obstacle import Obstacle
@@ -11,6 +12,7 @@ class Game:
         self.running = True
         self.clock = pygame.time.Clock()
         self.player = Player(self, 0, 0)
+        self.hud = HUD(screen)
         self.terrain = Terrain(0, 0)
         self.fruits = [Fruit(self, 700, 200), Fruit(self, 300, 200)]
 
@@ -61,6 +63,7 @@ class Game:
         self.player.draw(self.screen)
         for fruit in self.fruits:
             fruit.draw(self.screen)
+        self.hud.draw(self.screen)
         pygame.display.flip()
 
     def run(self):  # methode run
