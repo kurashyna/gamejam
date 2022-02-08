@@ -12,7 +12,7 @@ class Game:
         self.running = True
         self.clock = pygame.time.Clock()
         self.player = Player(self, 0, 0)
-        self.hud = HUD(screen)
+        self.hud = HUD(screen, self.player)
         self.terrain = Terrain(0, 0)
         self.fruits = [Fruit(self, 700, 200), Fruit(self, 300, 200)]
 

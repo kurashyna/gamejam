@@ -2,7 +2,7 @@ import pygame
 
 
 class Healthbar:
-    def __init__(self, x, y):
+    def __init__(self):
         # healthbar is made of 4 hearths icons
         self.hearths = []
         self.offset = 60  # space between each hearth

@@ -49,12 +49,15 @@ class Player:
     def addDash(self):
         self.dashsAvailable += 1
         print(self.dashsAvailable)
+        self.game.hud.powerUpBar.addDash()  # add the dash icon to the hud
 
     def dash(self):
         self.speed = 15
+        # get the moment when the dash was used
         self.dashUseMoment = pygame.time.get_ticks()
         self.isDashing = True
         self.dashsAvailable -= 1
+        self.game.hud.powerUpBar.removeDash()  # add the dash icon to the hud
 
     def draw(self, screen):
         screen.blit(self.image, self.rect)
