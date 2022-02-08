@@ -23,7 +23,7 @@ class PowerUpBar:
 class DashCharge:
     def __init__(self, x, y):
         self.image = pygame.image.load(
-            "assets/sprites/png/fruits/pear.png")
+            "assets/sprites/png/hud/pear.png")
         self.rect = self.image.get_rect(x=x, y=y)
 
     def draw(self, screen):

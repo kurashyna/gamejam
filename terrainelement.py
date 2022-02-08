@@ -3,10 +3,14 @@ from abc import ABC
 
 
 class TerrainElement(ABC):  # abstract class
-    def __init__(self, x, y, scale, image):
+    def __init__(self, x, y, scale, folder, filename):
         # made with a method so that it can be set in each class
-        self.image = pygame.image.load(image)
-        self.setScale(scale)  # change the size of the object
+        self.folder = folder
+        self.filename = filename
+        # self.image = pygame.image.load(self.folder + self.filename)
+        self.scale = scale
+        self.toggleSprite("day")
+        # self.setScale(self.scale)  # change the size of the object
         self.rect = self.image.get_rect(x=x, y=y)
 
     def move(self, xDirection, yDirection):
@@ -16,10 +20,19 @@ class TerrainElement(ABC):  # abstract class
         screen.blit(self.image, self.rect)
 
     # virtual methods
-    def setScale(self, scale):
+    def setScale(self):
         self.size = self.image.get_size()  # obtient la taille de l'image
         self.image = pygame.transform.scale(
-            self.image, (int(self.size[0]*scale), int(self.size[1]*scale)))  # multiplie la taille de x et y par 5
+            self.image, (int(self.size[0]*self.scale), int(self.size[1]*self.scale)))  # multiplie la taille de x et y par 5
+
+    def toggleSprite(self, dayOrNight):
+        # made with a method so that it can be set in each class
+        self.setSprite(dayOrNight)
+        self.setScale()
+
+    def setSprite(self, dayOrNight):
+        self.image = pygame.image.load(
+            self.folder + dayOrNight + "/" + self.filename)
 
     def update(self, player):
         pass
@@ -27,8 +40,10 @@ class TerrainElement(ABC):  # abstract class
 
 class Obstacle(TerrainElement):
     def __init__(self, x, y, scale):
-        imageLocation = "assets/sprites/png/background/moulin.png"
-        TerrainElement.__init__(self, x, y, scale, imageLocation)
+        folder = "assets/sprites/png/terrain/obstacles/"
+        filename = "moulin.png"
+
+        TerrainElement.__init__(self, x, y, scale, folder, filename)
 
     def update(self, player):
         if self.rect.colliderect(player.rect):
@@ -38,8 +53,9 @@ class Obstacle(TerrainElement):
 class Fruit(TerrainElement):
     def __init__(self, terrain, x, y, scale):
         self.terrain = terrain
-        imageLocation = "assets/sprites/png/fruits/pear.png"
-        TerrainElement.__init__(self, x, y, scale, imageLocation)
+        folder = "assets/sprites/png/terrain/fruits/"
+        filename = "pear.png"
+        TerrainElement.__init__(self, x, y, scale, folder, filename)
 
     def update(self, player):
         if self.rect.colliderect(player.rect):
@@ -53,8 +69,9 @@ class Fruit(TerrainElement):
 class Ground(TerrainElement):
     def __init__(self, x, y):
         scale = 5
-        imageLocation = "assets/sprites/png/background/terrain.png"
-        TerrainElement.__init__(self, x, y, scale, imageLocation)
+        folder = "assets/sprites/png/terrain/background/"
+        filename = "ground.png"
+        TerrainElement.__init__(self, x, y, scale, folder, filename)
 
     def update(self, player):
         if not self.rect.colliderect(player.rect):

@@ -1,9 +1,8 @@
 import pygame
-from fruit import Fruit
 from hud import HUD
 from player import Player
 from terrain import Terrain
-from obstacle import Obstacle
+from environment import Environment
 
 
 class Game:
@@ -14,7 +13,7 @@ class Game:
         self.player = Player(self, 500, 360)
         self.hud = HUD(screen, self.player)
         self.terrain = Terrain(self, self.player)
-
+        self.environment = Environment(self)
         # booleans used to prevent diagonal movement
         self.xIsPressed = False
         self.yIsPressed = False
@@ -29,6 +28,7 @@ class Game:
     def update(self):
         self.player.update()
         self.terrain.update(self.player)
+        self.environment.update()
 
     def display(self):
         self.screen.fill((71, 71, 71))
