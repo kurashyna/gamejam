@@ -58,5 +58,4 @@ class Ground(TerrainElement):
 
     def update(self, player):
         if not self.rect.colliderect(player.rect):
-            print("dehors")
             player.bounce()
