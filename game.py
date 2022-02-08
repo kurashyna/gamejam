@@ -45,8 +45,8 @@ class Game:
             self.clock.tick(60)
 
 
-pygame.init()
-screen = pygame.display.set_mode((1080, 720))
-game = Game(screen)  # instantiation de l'objet
-game.run()  # lancement du jeu
-pygame.quit()
+# pygame.init()
+# screen = pygame.display.set_mode((1080, 720))
+# game = Game(screen)  # instantiation de l'objet
+# game.run()  # lancement du jeu
+# pygame.quit()

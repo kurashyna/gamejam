@@ -6,14 +6,12 @@ pygame.init()
 screen = pygame.display.set_mode((1080, 720))
 # tite de la fênetre
 pygame.display.set_caption("Main Menu")
-
 # chaque fonction va afficher une fenetre diff et chac  une a une boucle de jeu differentes
 # pour passer d'une à l'autre il suffit de changer le background en noir
 
 
 def main_menu():
     running = True
-    print("on est la")
     while(running):
         screen.fill((116, 190, 88))
 
@@ -92,9 +90,9 @@ def options():
 
 
 def play():
+    pygame.display.set_caption("Devil Fruit")
     running = True
     while(running):
-        pygame.init()
         screen = pygame.display.set_mode((1080, 720))
         game = Game(screen)  # instantiation de l'objet
         game.run()  # lancement du jeu
