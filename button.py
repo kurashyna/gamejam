@@ -1,5 +1,5 @@
 import pygame
-class Button():
+class Button:
 	#buttons a utiliser pour les vues
 	def __init__(self,image, x, y):
 		self.image = image

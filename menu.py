@@ -1,5 +1,5 @@
 import pygame
-
+from game import Game
 from button import Button
 
 pygame.init()
@@ -13,6 +13,7 @@ pygame.display.set_caption("Main Menu")
 
 def main_menu():
     running = True
+    print("on est la")
     while(running):
         screen.fill((116, 190, 88))
 
@@ -61,6 +62,7 @@ def main_menu():
 def options():
     running = True
     while running:
+        pygame.display.set_caption("Options")
         screen.fill((116, 190, 88))
 
         # cadre fond
@@ -90,7 +92,16 @@ def options():
 
 
 def play():
-    print("")
+    running = True
+    while(running):
+        pygame.init()
+        screen = pygame.display.set_mode((1080, 720))
+        game = Game(screen)  # instantiation de l'objet
+        game.run()  # lancement du jeu
+        pygame.quit()
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = False
 
 
 main_menu()
