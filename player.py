@@ -13,9 +13,10 @@ class Player:
         self.dashsAvailable = 0
         self.dashUseMoment = 0
         self.isDashing = False
+        self.isBouncing = False
+        self.bounceMoment = 0
         self.maxHP = 8
         self.currentHP = self.maxHP  # start with healthbar full
-
     def handle_events(self, event):
         if event.type == pygame.KEYDOWN:
             # movement
@@ -36,7 +37,12 @@ class Player:
             if pygame.time.get_ticks() > self.dashUseMoment + 300:
                 self.speed = 5
                 self.isDashing = False
+        if self.isBouncing:
+            if pygame.time.get_ticks() > self.bounceMoment + 400:
+                self.isBouncing = False
+
         self.move()
+
 
     def move(self):
         self.game.terrain.move(-(self.velocity[0] *
@@ -45,8 +51,12 @@ class Player:
         #     self.velocity[0] * self.speed, self.velocity[1] * self.speed)
 
     def bounce(self):
-        self.velocity[0] = -self.velocity[0]
-        self.velocity[1] = -self.velocity[1]
+        if not self.isBouncing :
+            self.isBouncing = True
+            self.bounceMoment = pygame.time.get_ticks()
+            self.velocity[0] = -self.velocity[0]
+            self.velocity[1] = -self.velocity[1]
+
 
     def addDash(self):
         self.dashsAvailable += 1
