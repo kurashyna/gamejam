@@ -55,3 +55,8 @@ class Ground(TerrainElement):
         scale = 5
         imageLocation = "assets/sprites/png/background/terrain.png"
         TerrainElement.__init__(self, x, y, scale, imageLocation)
+
+    def update(self, player):
+        if not self.rect.colliderect(player.rect):
+            print("dehors")
+            player.bounce()

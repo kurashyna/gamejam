@@ -26,7 +26,8 @@ class Terrain:
                 for terrainElement in terrainElementList:
                     # ground has no update method so no else
                     terrainElement.update(player)
-
+            else :
+                terrainElementList.update(player)
     def draw(self, screen):
         for terrainElementList in self.terrainElements:  # iterate through all the terrainelements
             if hasattr(terrainElementList, '__iter__'):  # if its iterable
