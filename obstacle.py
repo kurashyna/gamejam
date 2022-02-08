@@ -10,6 +10,9 @@ class Obstacle:
             self.image, (int(self.size[0]*5), int(self.size[1]*5)))  # multiplie la taille de x et y par 5
         self.rect = self.image.get_rect(x=x, y=y)
 
+    def move(self, xDirection, yDirection):
+        self.rect.move_ip(xDirection, yDirection)
+
     def update(self, player):
         if self.rect.colliderect(player.rect):
             player.bounce()

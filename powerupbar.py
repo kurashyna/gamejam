@@ -7,8 +7,6 @@ class PowerUpBar:
         self.player = player
         self.dashCharges = []
         self.offset = 60  # space between each hearth
-        # for i in range(self.player.dashsAvailable):
-        #     self.dashCharges.append(DashCharge(700 + (i*self.offset), 600))
 
     def addDash(self):
         self.dashCharges.append(DashCharge(

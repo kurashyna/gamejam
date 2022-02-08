@@ -11,10 +11,9 @@ class Game:
         self.screen = screen
         self.running = True
         self.clock = pygame.time.Clock()
-        self.player = Player(self, 0, 0)
+        self.player = Player(self, 500, 360)
         self.hud = HUD(screen, self.player)
-        self.terrain = Terrain(0, 0)
-        self.fruits = [Fruit(self, 700, 200), Fruit(self, 300, 200)]
+        self.terrain = Terrain(self, self.player)
 
         # booleans used to prevent diagonal movement
         self.xIsPressed = False
@@ -27,42 +26,14 @@ class Game:
                 self.running = False
             self.player.handle_events(event)
 
-        # # movement inputs
-        # pressed = pygame.key.get_pressed()
-        # # axe x
-
-        # if pressed[pygame.K_LEFT]:
-        #     self.player.velocity[0] = -1
-        #     xIsPressed = True
-        # elif pressed[pygame.K_RIGHT]:
-        #     self.player.velocity[0] = 1
-        #     xIsPressed = True
-        # else:
-        #     self.player.velocity[0] = 0
-        #     xIsPressed = False
-
-        # if pressed[pygame.K_UP]:
-        #     self.player.velocity[1] = -1
-        #     yIsPressed = True
-        # elif pressed[pygame.K_DOWN]:
-        #     self.player.velocity[1] = 1
-        #     yIsPressed = True
-        # else:
-        #     self.player.velocity[1] = 0
-        #     yIsPressed = False
-
     def update(self):
         self.player.update()
         self.terrain.update(self.player)
-        for fruit in self.fruits:
-            fruit.update(self.player)
 
     def display(self):
-        self.screen.fill((27, 27, 27))
+        self.screen.fill((71, 71, 71))
         self.terrain.draw(self.screen)
         self.player.draw(self.screen)
-        for fruit in self.fruits:
-            fruit.draw(self.screen)
         self.hud.draw(self.screen)
         pygame.display.flip()
 

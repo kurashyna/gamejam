@@ -16,6 +16,9 @@ class Fruit:
             player.addDash()
             self.getEaten()
 
+    def move(self, xDirection, yDirection):
+        self.rect.move_ip(xDirection, yDirection)
+
     def getEaten(self):
         self.game.fruits.remove(self)
 
