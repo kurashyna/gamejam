@@ -6,9 +6,12 @@ class Terrain:
     def __init__(self, game, player):
         self.player = player
         self.ground = Ground(0, 0)
-        self.obstacles = [Obstacle(800, 300, 5), Obstacle(200, 300, 3)]
+        self.effects = []
+        self.obstacles = [
+            Obstacle(self, 800, 300, 5, "mill"), Obstacle(self, 200, 300, 3, "mill")]
         self.fruits = [Fruit(self, 700, 200, 1), Fruit(self, 300, 200, 2)]
-        self.terrainElements = [self.ground, self.obstacles, self.fruits]
+        self.terrainElements = [self.ground,
+                                self.obstacles, self.effects, self.fruits]
 
     def move(self, xDirection, yDirection):
         for terrainElementList in self.terrainElements:  # iterate through all the terrainelements
@@ -23,7 +26,6 @@ class Terrain:
         for terrainElementList in self.terrainElements:  # iterate through all the terrainelements
             if hasattr(terrainElementList, '__iter__'):  # if its iterable
                 for terrainElement in terrainElementList:
-                    # ground has no update method so no else
                     terrainElement.update(player)
             else:
                 terrainElementList.update(player)

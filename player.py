@@ -7,7 +7,7 @@ class Player:
         self.image = pygame.image.load(
             "assets/sprites/png/characters/knight.png")
         self.rect = self.image.get_rect(x=x, y=y)
-        self.speed = 5
+        self.speed = 10
         self.velocity = [0, 0]
         # dash
         self.dashsAvailable = 0
@@ -61,7 +61,7 @@ class Player:
         self.game.hud.powerUpBar.addDash()  # add the dash icon to the hud
 
     def dash(self):
-        self.speed = 15
+        self.speed = self.speed*2
         # get the moment when the dash was used
         self.dashUseMoment = pygame.time.get_ticks()
         self.isDashing = True

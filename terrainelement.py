@@ -1,3 +1,4 @@
+from fileinput import filename
 import pygame
 from abc import ABC
 
@@ -32,18 +33,20 @@ class TerrainElement(ABC):  # abstract class
 
     def setSprite(self, dayOrNight):
         self.image = pygame.image.load(
-            self.folder + dayOrNight + "/" + self.filename)
+            self.folder + dayOrNight + "/" + self.filename + ".png")
 
     def update(self, player):
         pass
 
 
 class Obstacle(TerrainElement):
-    def __init__(self, x, y, scale):
+    def __init__(self, terrain, x, y, scale, type):
+        self.type = type
         folder = "assets/sprites/png/terrain/obstacles/"
-        filename = "moulin.png"
-
+        filename = self.type
         TerrainElement.__init__(self, x, y, scale, folder, filename)
+        if self.type == "meteor":
+            terrain.effects.append(Smoke(terrain, x - 60, y - 80))
 
     def update(self, player):
         if self.rect.colliderect(player.rect):
@@ -54,7 +57,7 @@ class Fruit(TerrainElement):
     def __init__(self, terrain, x, y, scale):
         self.terrain = terrain
         folder = "assets/sprites/png/terrain/fruits/"
-        filename = "pear.png"
+        filename = "pear"
         TerrainElement.__init__(self, x, y, scale, folder, filename)
 
     def update(self, player):
@@ -70,9 +73,44 @@ class Ground(TerrainElement):
     def __init__(self, x, y):
         scale = 5
         folder = "assets/sprites/png/terrain/background/"
-        filename = "ground.png"
+        filename = "ground"
         TerrainElement.__init__(self, x, y, scale, folder, filename)
 
     def update(self, player):
         if not self.rect.colliderect(player.rect):
             player.bounce()
+
+
+class Smoke(TerrainElement):
+    def __init__(self, terrain, x, y):
+        self.terrain = terrain
+        scale = 7
+        folder = "assets/sprites/png/smoke_animation/"
+        self.lastTimeFrameChanged = 0
+        self.currentFrame = 0
+        filename = "smoke_" + str(self.currentFrame)
+        TerrainElement.__init__(self, x, y, scale, folder, filename)
+
+    def update(self, player):
+        if pygame.time.get_ticks() > self.lastTimeFrameChanged + 83:
+            if self.currentFrame == 5:
+                self.currentFrame = 0
+                self.terrain.effects.remove(self)
+            else:
+                self.currentFrame += 1
+
+            self.lastTimeFrameChanged = pygame.time.get_ticks()
+            self.filename = "smoke_" + str(self.currentFrame)
+            self.toggleSprite("day")
+
+
+class MeteorShadow(TerrainElement):
+    def __init__(self, x, y):
+        scale = 7
+        folder = "assets/sprites/png/smoke_animation/"
+
+        self.lastTimeFrameChanged = 0
+        self.currentFrame = 0
+        # filename = "smoke_" + str(self.currentFrame)
+        filename = "meteor_shadow"
+        TerrainElement.__init__(self, x, y, scale, folder, filename)
