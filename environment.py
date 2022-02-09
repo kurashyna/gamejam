@@ -19,6 +19,9 @@ class Environment:
         self.delayBeforeFalling = 500
         self.meteorShadow = NULL
         self.delayBetweenMeteor = 2000
+        self.fruit = NULL
+        self.lastTimeFruitAppear = 0
+        self.groundrect=(self.game.terrain.ground.rect)
 
     def update(self):
         currentTime = pygame.time.get_ticks()
@@ -45,6 +48,10 @@ class Environment:
                 self.lastTimeMeteorStartedFalling = currentTime
                 self.appearMeteor()
 
+        if currentTime > self.lastTimeFruitAppear + 5000 :
+            self.lastTimeFruitAppear = currentTime
+            self.appearFruit()
+
     def toggleDay(self):
         if self.dayOrNight == "day":
             self.music = pygame.mixer.music.load(
@@ -64,6 +71,8 @@ class Environment:
                                          random.randrange(self.game.player.rect.y - 200, self.game.player.rect.y + 200))
         self.game.terrain.effects.append(self.meteorShadow)
 
+    def appearFruit(self):
+        self.game.terrain.fruits.append(Fruit(self.game.terrain ,random.randrange(self.groundrect.left,self.groundrect.right),random.randrange(self.groundrect.top,self.groundrect.bottom),1))
     def fallMeteor(self):
         self.game.terrain.obstacles.append(
             Obstacle(self.game.terrain, self.meteorShadow.rect.x, self.meteorShadow.rect.y, 7, "meteor"))
