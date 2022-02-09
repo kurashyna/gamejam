@@ -18,6 +18,7 @@ class Environment:
         self.lastTimeMeteorFalled = 0
         self.delayBeforeFalling = 500
         self.meteorShadow = NULL
+        self.delayBetweenMeteor = 2000
 
     def update(self):
         currentTime = pygame.time.get_ticks()
@@ -32,9 +33,15 @@ class Environment:
             if currentTime > self.lastTimeMeteorStartedFalling + self.delayBeforeFalling:
                 self.fallMeteor()
                 self.lastTimeMeteorFalled = currentTime
+                if self.delayBeforeFalling > 100:
+                    self.delayBeforeFalling = self.delayBeforeFalling-10
+
+                if self.delayBetweenMeteor > 500 :
+                    self.delayBetweenMeteor = self.delayBetweenMeteor-20
+
         elif self.dayOrNight == "night":
             # no meteor is currently falling
-            if currentTime > self.lastTimeMeteorStartedFalling + 2000:
+            if currentTime > self.lastTimeMeteorStartedFalling + self.delayBetweenMeteor :
                 self.lastTimeMeteorStartedFalling = currentTime
                 self.appearMeteor()
 
