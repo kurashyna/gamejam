@@ -11,7 +11,7 @@ class Game:
         self.running = True
         self.clock = pygame.time.Clock()
         self.player = Player(self, 500, 360)
-        self.hud = HUD(screen, self.player)
+        self.hud = HUD(screen, self)
         self.terrain = Terrain(self, self.player)
         self.environment = Environment(self)
         # booleans used to prevent diagonal movement
@@ -29,6 +29,7 @@ class Game:
         self.player.update()
         self.terrain.update(self.player)
         self.environment.update()
+        self.hud.update()
 
     def display(self):
         self.screen.fill((71, 71, 71))

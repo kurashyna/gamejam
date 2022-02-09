@@ -10,7 +10,6 @@ class Environment:
     def __init__(self, game):
         self.game = game
         self.dayTime = 5000
-
         self.dayOrNight = "night"
         self.toggleDay()
         self.lastTimeChanged = 0
@@ -21,7 +20,7 @@ class Environment:
         self.delayBetweenMeteor = 2000
         self.fruit = NULL
         self.lastTimeFruitAppear = 0
-        self.groundrect=(self.game.terrain.ground.rect)
+        self.groundrect = (self.game.terrain.ground.rect)
 
     def update(self):
         currentTime = pygame.time.get_ticks()
@@ -39,16 +38,16 @@ class Environment:
                 if self.delayBeforeFalling > 100:
                     self.delayBeforeFalling = self.delayBeforeFalling-10
 
-                if self.delayBetweenMeteor > 500 :
+                if self.delayBetweenMeteor > 500:
                     self.delayBetweenMeteor = self.delayBetweenMeteor-20
 
         elif self.dayOrNight == "night":
             # no meteor is currently falling
-            if currentTime > self.lastTimeMeteorStartedFalling + self.delayBetweenMeteor :
+            if currentTime > self.lastTimeMeteorStartedFalling + self.delayBetweenMeteor:
                 self.lastTimeMeteorStartedFalling = currentTime
                 self.appearMeteor()
         if self.dayOrNight == "day":
-            if currentTime > self.lastTimeFruitAppear + 5000 :
+            if currentTime > self.lastTimeFruitAppear + 5000:
                 self.lastTimeFruitAppear = currentTime
                 self.appearFruit()
 
@@ -66,13 +65,25 @@ class Environment:
         self.game.terrain.setSprites(self.dayOrNight)
         print(self.dayOrNight)
 
+    def fruitIsColliding(self, fruit):
+        for obstacle in self.game.terrain.obstacles:
+            if obstacle.rect.colliderect(fruit.rect):
+                return True
+        return False
+
     def appearMeteor(self):
         self.meteorShadow = MeteorShadow(random.randrange(self.game.player.rect.x - 200, self.game.player.rect.x + 200),
                                          random.randrange(self.game.player.rect.y - 200, self.game.player.rect.y + 200))
         self.game.terrain.effects.append(self.meteorShadow)
 
     def appearFruit(self):
-        self.game.terrain.fruits.append(Fruit(self.game.terrain ,random.randrange(self.groundrect.left,self.groundrect.right),random.randrange(self.groundrect.top,self.groundrect.bottom),1))
+        while True:
+            newFruit = Fruit(self.game.terrain, random.randrange(
+                self.groundrect.left, self.groundrect.right), random.randrange(self.groundrect.top, self.groundrect.bottom), 1)
+            if not self.fruitIsColliding(newFruit):
+                break
+        self.game.terrain.fruits.append(newFruit)
+
     def fallMeteor(self):
         self.game.terrain.obstacles.append(
             Obstacle(self.game.terrain, self.meteorShadow.rect.x, self.meteorShadow.rect.y, 7, "meteor"))
