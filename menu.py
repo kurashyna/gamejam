@@ -55,7 +55,6 @@ class Menu:
                         running = False
 
             pygame.display.update()
-
         pygame.quit()
 
 
