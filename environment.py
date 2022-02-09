@@ -47,10 +47,10 @@ class Environment:
             if currentTime > self.lastTimeMeteorStartedFalling + self.delayBetweenMeteor :
                 self.lastTimeMeteorStartedFalling = currentTime
                 self.appearMeteor()
-
-        if currentTime > self.lastTimeFruitAppear + 5000 :
-            self.lastTimeFruitAppear = currentTime
-            self.appearFruit()
+        if self.dayOrNight == "day":
+            if currentTime > self.lastTimeFruitAppear + 5000 :
+                self.lastTimeFruitAppear = currentTime
+                self.appearFruit()
 
     def toggleDay(self):
         if self.dayOrNight == "day":
