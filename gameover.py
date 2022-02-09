@@ -55,8 +55,8 @@ class GameOver:
         pygame.quit()
 
 
-pygame.init()
-screen = pygame.display.set_mode((1080, 720))
-end = GameOver(screen)  # instantiation de l'objet
-end.game_over()
-pygame.quit()
+# pygame.init()
+# screen = pygame.display.set_mode((1080, 720))
+# end = GameOver(screen)  # instantiation de l'objet
+# end.game_over()
+# pygame.quit()
