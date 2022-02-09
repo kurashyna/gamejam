@@ -37,7 +37,7 @@ class Player:
     def update(self):
         if self.isDashing:
             if pygame.time.get_ticks() > self.dashUseMoment + 300:
-                self.speed = 5
+                self.speed = self.speed / 2
                 self.isDashing = False
         if self.isBouncing:
             if pygame.time.get_ticks() > self.bounceMoment + 100:
