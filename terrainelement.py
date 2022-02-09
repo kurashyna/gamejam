@@ -122,8 +122,7 @@ class Projectile(TerrainElement):
         self.y = y
         self.color = (255, 255, 255)
         self.velocity = 8
-
-    def draw(self, screen):
-        self.line = pygame.draw.line(screen, self.color, (self.x, self.y),
-                                     (self.x + 100, self.y))
-        screen.blit(screen, self.line)
+        scale = 2
+        folder = "assets/sprites/png/terrain/projectiles/"
+        filename = "laser"
+        TerrainElement.__init__(self, x, y, scale, folder, filename)
