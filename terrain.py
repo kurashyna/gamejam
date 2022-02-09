@@ -7,11 +7,12 @@ class Terrain:
         self.player = player
         self.ground = Ground(0, 0)
         self.effects = []
+        self.projectile = Projectile(100, 300)
         self.obstacles = [
             Obstacle(self, 800, 300, 5, "mill"), Obstacle(self, 200, 300, 3, "mill")]
         self.fruits = [Fruit(self, 700, 200, 1), Fruit(self, 300, 200, 2)]
         self.terrainElements = [self.ground,
-                                self.obstacles, self.effects, self.fruits]
+                                self.obstacles, self.effects, self.fruits, self.projectile]
 
     def move(self, xDirection, yDirection):
         for terrainElementList in self.terrainElements:  # iterate through all the terrainelements

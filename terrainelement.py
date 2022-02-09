@@ -10,7 +10,7 @@ class TerrainElement(ABC):  # abstract class
         self.filename = filename
         # self.image = pygame.image.load(self.folder + self.filename)
         self.scale = scale
-        self.toggleSprite("day")
+        self.toggleSprite("night")
         # self.setScale(self.scale)  # change the size of the object
         self.rect = self.image.get_rect(x=x, y=y)
 
@@ -114,3 +114,16 @@ class MeteorShadow(TerrainElement):
         # filename = "smoke_" + str(self.currentFrame)
         filename = "meteor_shadow"
         TerrainElement.__init__(self, x, y, scale, folder, filename)
+
+
+class Projectile(TerrainElement):
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+        self.color = (255, 255, 255)
+        self.velocity = 8
+
+    def draw(self, screen):
+        self.line = pygame.draw.line(screen, self.color, (self.x, self.y),
+                                     (self.x + 100, self.y))
+        screen.blit(screen, self.line)
