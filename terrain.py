@@ -1,6 +1,6 @@
 import pygame
 from terrainelement import *
-
+import random
 
 class Terrain:
     def __init__(self, game, player):
@@ -9,7 +9,7 @@ class Terrain:
         self.effects = []
         self.projectile = Projectile(100, 300)
         self.obstacles = [
-            Obstacle(self, 800, 300, 5, "mill"), Obstacle(self, 200, 300, 3, "mill")]
+            Obstacle(self,random.randrange(0, 4400),random.randrange(0, 2800), 5, "mill"),Obstacle(self,random.randrange(0, 4400),random.randrange(0, 2800), 5, "mill"),Obstacle(self,random.randrange(0, 4400),random.randrange(0, 2800), 5, "mill"),Obstacle(self,random.randrange(0, 4400),random.randrange(0, 2800), 5, "mill"),Obstacle(self,random.randrange(0, 4400),random.randrange(0, 2800), 5, "mill"),Obstacle(self,random.randrange(0, 4400),random.randrange(0, 2800), 5, "mill"),Obstacle(self,random.randrange(0, 4400),random.randrange(0, 2800), 5, "mill") ]
         self.fruits = [Fruit(self, 700, 200, 1), Fruit(self, 300, 200, 2)]
         self.terrainElements = [self.ground,
                                 self.obstacles, self.effects, self.fruits, self.projectile]
