@@ -86,5 +86,5 @@ class Environment:
 
     def fallMeteor(self):
         self.game.terrain.obstacles.append(
-            Obstacle(self.game.terrain, self.meteorShadow.rect.x, self.meteorShadow.rect.y, 7, "meteor"))
+            Obstacle(self.game.terrain, self.meteorShadow.rect.x, self.meteorShadow.rect.y,random.randrange(7,15), "meteor"))
         self.game.terrain.effects.remove(self.meteorShadow)

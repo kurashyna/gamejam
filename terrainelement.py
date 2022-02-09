@@ -1,6 +1,7 @@
 from fileinput import filename
 import pygame
 from abc import ABC
+import random
 
 
 class TerrainElement(ABC):  # abstract class
@@ -106,7 +107,7 @@ class Smoke(TerrainElement):
 
 class MeteorShadow(TerrainElement):
     def __init__(self, x, y):
-        scale = 7
+        scale = random.randrange(7,15)
         folder = "assets/sprites/png/smoke_animation/"
 
         self.lastTimeFrameChanged = 0
