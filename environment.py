@@ -12,7 +12,6 @@ class Environment:
         self.game = game
         self.dayTime = 5000
         self.dayOrNight = "night"
-        self.toggleDay()
         self.lastTimeChanged = pygame.time.get_ticks()
         self.lastTimeMeteorStartedFalling = 0
         self.lastTimeMeteorFalled = 0
@@ -23,6 +22,8 @@ class Environment:
         self.groundrect = (self.game.terrain.ground.rect)
         self.lastTimeLazerWasShot = 0
         self.lazerSpawnDelay = 200
+        self.lazerMinSpeed = 6
+        self.toggleDay()
 
     def update(self):
         currentTime = pygame.time.get_ticks()
@@ -58,7 +59,7 @@ class Environment:
             lazer.update(self.game.player)
         if self.dayOrNight == "night" and currentTime > self.lastTimeLazerWasShot + self.lazerSpawnDelay and self.game.terrain.freeze==False:
             self.game.terrain.projectiles.append(
-                Projectile(self.game, currentTime))
+                Projectile(self.game, currentTime, self.lazerMinSpeed))
             self.lastTimeLazerWasShot = currentTime
 
     def toggleDay(self):
@@ -68,16 +69,18 @@ class Environment:
                 "assets/sounds/music/night.mp3")
             pygame.mixer.music.play(-1)  # change the music
             self.dayOrNight = "night"
-            self.game.hud.score.addValue(
-                self.game.hud.score.value)  # doubles the score
-            if self.lazerSpawnDelay > 60:
-                self.lazerSpawnDelay -= 20
         else:
             # change to day
             self.music = pygame.mixer.music.load("assets/sounds/music/day.mp3")
             pygame.mixer.music.play(-1)  # change the music
             self.dayOrNight = "day"
             pygame.mixer.music.play(0)
+            # increase difficulty for next night
+            self.lazerMinSpeed += 1
+            if self.lazerSpawnDelay > 60:
+                self.lazerSpawnDelay -= 20
+             # doubles the score
+            self.game.hud.score.addValue(self.game.hud.score.value)
         self.game.terrain.setSprites(self.dayOrNight)
 
     def fruitIsColliding(self, fruit):
@@ -94,7 +97,7 @@ class Environment:
     def appearFruit(self):
         while True:
             newFruit = Fruit(self.game.terrain, random.randrange(
-                self.groundrect.left, self.groundrect.right), random.randrange(self.groundrect.top, self.groundrect.bottom), 1, random.randrange(0, 4))
+                self.groundrect.left, self.groundrect.right), random.randrange(self.groundrect.top, self.groundrect.bottom), 1, self.dayOrNight)
             if not self.fruitIsColliding(newFruit):
                 break
         self.game.terrain.fruits.append(newFruit)
