@@ -60,6 +60,8 @@ class Player:
         print(self.dashsAvailable)
         self.game.hud.powerUpBar.addDash()  # add the dash icon to the hud
 
+    def mouvementspeedbuff(self):
+        self.speed=self.speed+2
     def dash(self):
         self.speed = self.speed*2
         # get the moment when the dash was used
