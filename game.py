@@ -35,7 +35,7 @@ class Game:
         self.hud.update()
 
     def display(self):
-        self.screen.fill((71, 71, 71))
+        self.screen.fill((173, 188, 58))
         self.terrain.draw(self.screen)
         self.player.draw(self.screen)
         self.hud.draw(self.screen)

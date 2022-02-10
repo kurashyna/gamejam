@@ -99,10 +99,11 @@ class Player:
                                self.currentSpeed), -(self.velocity[1] * self.currentSpeed))
 
     def bounce(self):
-        self.isBouncing = True
-        self.bounceMoment = pygame.time.get_ticks()
-        self.velocity[0] = -self.velocity[0]
-        self.velocity[1] = -self.velocity[1]
+        if not self.isBouncing:
+            self.isBouncing = True
+            self.bounceMoment = pygame.time.get_ticks()
+            self.velocity[0] = -self.velocity[0]
+            self.velocity[1] = -self.velocity[1]
 
     def addDash(self):
         self.dashsAvailable += 1
