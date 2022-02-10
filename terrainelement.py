@@ -55,15 +55,26 @@ class Obstacle(TerrainElement):
 
 
 class Fruit(TerrainElement):
-    def __init__(self, terrain, x, y, scale):
+    randomfruit = 1
+    def __init__(self, terrain, x, y, scale,randomfruit):
+        self.randomfruit=randomfruit
         self.terrain = terrain
         folder = "assets/sprites/png/terrain/fruits/"
-        filename = "pear"
+        if randomfruit == 0 :
+            filename = "pear"
+        elif randomfruit == 1 :
+            filename = "apple"
+
         TerrainElement.__init__(self, x, y, scale, folder, filename)
 
     def update(self, player):
         if self.rect.colliderect(player.rect):
-            player.addDash()
+            if self.randomfruit ==0 :
+                player.addDash()
+                print ("mangé")
+            elif self.randomfruit ==1 :
+                player.mouvementspeedbuff()
+
             self.getEaten()
 
     def getEaten(self):
