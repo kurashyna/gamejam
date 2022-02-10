@@ -6,3 +6,7 @@ Bienvenue sur le tout nouveau jeu de Rito Games!![Sprite-0006](https://user-imag
 ## Installation
 
 ## Crédits
+Musique jour: https://soundcloud.com/user-841776650-179060405/extended-music-best-instrumental-download
+Musique nuit: https://soundcloud.com/grandakt/utopia
+Sprites Soldat et animations: https://pixel-boy.itch.io/ninja-adventure-asset-pack
+Elements de decors: https://pixelhole.itch.io/pixelholes-overworld-tileset
