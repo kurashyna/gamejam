@@ -70,6 +70,8 @@ class Environment:
             self.dayOrNight = "night"
             self.game.hud.score.addValue(
                 self.game.hud.score.value)  # doubles the score
+            if self.lazerSpawnDelay > 60:
+                self.lazerSpawnDelay -= 20
         else:
             # change to day
             self.music = pygame.mixer.music.load("assets/sounds/music/day.mp3")

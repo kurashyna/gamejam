@@ -7,14 +7,15 @@ class Player:
         self.hud = game.hud
         assetFolder = "assets/sprites/png/characters/"
         self.scale = 1
-        self.image = pygame.image.load(
-            "assets/sprites/png/characters/knight.png")
+        self.image = pygame.image.load(assetFolder + "knight_standing_0.png")
         self.size = self.image.get_size()  # obtient la taille de l'image
+
         self.animations = {
             "forward": [],
             "backward": [],
             "left": [],
             "right": [],
+            "standing": [],
         }
         for key in self.animations:
             for i in range(4):
@@ -77,8 +78,10 @@ class Player:
                 direction = "backward"
             elif self.velocity[0] > 0:
                 direction = "right"
-            else:
+            elif self.velocity[0] < 0:
                 direction = "left"
+            else:
+                direction = "standing"
             if self.currentAnimationFrame == len(self.animations["forward"]) - 1:
                 self.currentAnimationFrame = 0
             else:
@@ -127,6 +130,7 @@ class Player:
         self.hud.loseHP(1)
         if self.currentHP <= 0:
             self.game.gameOver()
+
     def recoveryhp(self):
-        self.currentHP = self.currentHP +1
+        self.currentHP = self.currentHP + 1
         self.hud.gainHP(1)
