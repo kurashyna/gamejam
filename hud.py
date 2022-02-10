@@ -23,3 +23,5 @@ class HUD:
 
     def loseHP(self, amount):
         self.healthbar.loseHP(amount)
+    def gainHP(self, amount):
+        self.healthbar.gainHP(amount)
