@@ -7,6 +7,7 @@ from gameover import GameOver
 
 
 class Game:
+
     def __init__(self, screen):  # constructeur
         self.screen = screen
         self.running = True
@@ -50,3 +51,5 @@ class Game:
         print("t nul")
         # end = GameOver(self.screen)
         # end.game_over()
+    def getTerrain(self):
+        return self.terrain

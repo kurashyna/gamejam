@@ -33,7 +33,7 @@ class Environment:
         # make meteors fall
 
         # le meteor a commencé mais n'a pas fini de tomber
-        if self.lastTimeMeteorStartedFalling > self.lastTimeMeteorFalled:
+        if self.lastTimeMeteorStartedFalling > self.lastTimeMeteorFalled  and self.game.terrain.freeze==False:
             if currentTime > self.lastTimeMeteorStartedFalling + self.delayBeforeFalling:
                 self.fallMeteor()
                 self.lastTimeMeteorFalled = currentTime
@@ -45,7 +45,7 @@ class Environment:
 
         elif self.dayOrNight == "night":
             # no meteor is currently falling
-            if currentTime > self.lastTimeMeteorStartedFalling + self.delayBetweenMeteor:
+            if currentTime > self.lastTimeMeteorStartedFalling + self.delayBetweenMeteor and self.game.terrain.freeze==False:
                 self.lastTimeMeteorStartedFalling = currentTime
                 self.appearMeteor()
         if self.dayOrNight == "day":
@@ -56,7 +56,7 @@ class Environment:
         # lazers
         for lazer in self.game.terrain.projectiles:
             lazer.update(self.game.player)
-        if self.dayOrNight == "night" and currentTime > self.lastTimeLazerWasShot + self.lazerSpawnDelay:
+        if self.dayOrNight == "night" and currentTime > self.lastTimeLazerWasShot + self.lazerSpawnDelay and self.game.terrain.freeze==False:
             self.game.terrain.projectiles.append(
                 Projectile(self.game, currentTime))
             self.lastTimeLazerWasShot = currentTime
@@ -94,7 +94,7 @@ class Environment:
     def appearFruit(self):
         while True:
             newFruit = Fruit(self.game.terrain, random.randrange(
-                self.groundrect.left, self.groundrect.right), random.randrange(self.groundrect.top, self.groundrect.bottom), 1, random.randrange(0, 3))
+                self.groundrect.left, self.groundrect.right), random.randrange(self.groundrect.top, self.groundrect.bottom), 1, random.randrange(0, 4))
             if not self.fruitIsColliding(newFruit):
                 break
         self.game.terrain.fruits.append(newFruit)

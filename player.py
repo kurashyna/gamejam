@@ -1,5 +1,5 @@
 import pygame
-
+from terrain import *
 
 class Player:
     def __init__(self, game, x, y):
@@ -9,7 +9,6 @@ class Player:
         self.scale = 1
         self.image = pygame.image.load(assetFolder + "knight_standing_0.png")
         self.size = self.image.get_size()  # obtient la taille de l'image
-
         self.animations = {
             "forward": [],
             "backward": [],
@@ -37,7 +36,8 @@ class Player:
         self.bounceMoment = 0
         self.maxHP = 4
         self.currentHP = self.maxHP  # start with healthbar full
-
+        #freezeAllAvailable
+        self.freezeAllAvailable =0
     # virtual methods
     def setScale(self):
         self.image = pygame.transform.scale(self.image, (int(
@@ -58,6 +58,8 @@ class Player:
                 # dash
                 if event.key == pygame.K_SPACE and self.dashsAvailable > 0:
                     self.dash()
+                if event.key == pygame.K_f and self.freezeAllAvailable > 0:
+                    self.freezeAll()
 
     def update(self):
         currentTime = pygame.time.get_ticks()
@@ -108,6 +110,10 @@ class Player:
         self.dashsAvailable += 1
         self.game.hud.powerUpBar.addDash(self)  # add the dash icon to the hud
 
+    def addFreezeall(self):
+        self.freezeAllAvailable += 1
+        self.game.hud.powerUpBar.addFreeze(self)
+
     def addScore(self, scoreAmount):
         self.game.hud.score.addValue(scoreAmount)
 
@@ -134,3 +140,12 @@ class Player:
     def recoveryhp(self):
         self.currentHP = self.currentHP + 1
         self.hud.gainHP(1)
+
+    def freezeAll(self) :
+        print("freeze")
+        self.game.terrain.freeze = True
+
+        for projectile in self.game.terrain.terrainElements[4] :
+            projectile.freeze = True
+            currentTime = pygame.time.get_ticks()
+        self.game.hud.powerUpBar.removeFreeze()

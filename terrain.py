@@ -11,7 +11,8 @@ class Terrain:
         self.projectiles = []
         self.obstacles = [
             Obstacle(self, random.randrange(0, 4400), random.randrange(0, 2800), 5, "mill"), Obstacle(self, random.randrange(0, 4400), random.randrange(0, 2800), 5, "mill"), Obstacle(self, random.randrange(0, 4400), random.randrange(0, 2800), 5, "mill"), Obstacle(self, random.randrange(0, 4400), random.randrange(0, 2800), 5, "mill"), Obstacle(self, random.randrange(0, 4400), random.randrange(0, 2800), 5, "mill"), Obstacle(self, random.randrange(0, 4400), random.randrange(0, 2800), 5, "mill"), Obstacle(self, random.randrange(0, 4400), random.randrange(0, 2800), 5, "mill")]
-        self.fruits = []
+        self.fruits = [Fruit(self,100,100,3,3)]
+        self.freeze = False
         self.terrainElements = [self.ground,
                                 self.obstacles, self.effects, self.fruits, self.projectiles]
 
@@ -25,12 +26,12 @@ class Terrain:
 
     def update(self, player):
         # detecte les collisions avec le joueur
-        for terrainElementList in self.terrainElements:  # iterate through all the terrainelements
-            if hasattr(terrainElementList, '__iter__'):  # if its iterable
-                for terrainElement in terrainElementList:
-                    terrainElement.update(player)
-            else:
-                terrainElementList.update(player)
+            for terrainElementList in self.terrainElements:  # iterate through all the terrainelements
+                if hasattr(terrainElementList, '__iter__'):  # if its iterable
+                    for terrainElement in terrainElementList:
+                        terrainElement.update(player)
+                else:
+                    terrainElementList.update(player)
 
     def draw(self, screen):
         for terrainElementList in self.terrainElements:  # iterate through all the terrainelements
