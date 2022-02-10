@@ -104,10 +104,3 @@ class Menu:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     running = False
-
-
-# pygame.init()
-# screen = pygame.display.set_mode((1080, 720))
-# menu = Menu(screen)  # instantiation de l'objet
-# menu.main_menu()
-# pygame.quit()

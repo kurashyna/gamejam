@@ -48,6 +48,5 @@ class Game:
 
     def gameOver(self):
         print("t nul")
-        end = GameOver(self.screen)
-        end.game_over()
-
+        # end = GameOver(self.screen)
+        # end.game_over()

@@ -16,13 +16,13 @@ class Environment:
         self.lastTimeChanged = pygame.time.get_ticks()
         self.lastTimeMeteorStartedFalling = 0
         self.lastTimeMeteorFalled = 0
-        self.delayBeforeFalling = 1000
+        self.delayBeforeFalling = 600
         self.meteorShadow = NULL
         self.delayBetweenMeteor = 2000
         self.lastTimeFruitAppear = 0
         self.groundrect = (self.game.terrain.ground.rect)
         self.lastTimeLazerWasShot = 0
-        self.lazerSpawnDelay = 200
+        self.lazerSpawnDelay = 300
 
     def update(self):
         currentTime = pygame.time.get_ticks()

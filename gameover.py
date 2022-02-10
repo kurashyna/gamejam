@@ -1,6 +1,5 @@
 import pygame
 from button import Button
-from menu import Menu
 
 
 class GameOver:
@@ -11,12 +10,12 @@ class GameOver:
     def game_over(self):
         running = True
         while (running):
-            #chagement logo & titre fenetre
+            # chagement logo & titre fenetre
             pygame.display.set_caption('Loser')
             logo_icon = pygame.image.load("assets/sprites/png/title.png")
             pygame.display.set_icon(logo_icon)
 
-            #couleur de fond
+            # couleur de fond
             self.screen.fill((0, 0, 0))
 
             # logo
@@ -24,9 +23,12 @@ class GameOver:
             self.screen.blit(Text, (200, 100))
 
             # boutons
-            play_again_button = Button(image=pygame.image.load("assets/sprites/png/buttons/play_again_button.png"), x=520, y=300)
-            menu_button = Button(image=pygame.image.load("assets/sprites/png/buttons/menu_button.png"), x=520, y=400)
-            quit_button = Button(image=pygame.image.load("assets/sprites/png/buttons/quit_button.png"), x=520, y=500)
+            play_again_button = Button(image=pygame.image.load(
+                "assets/sprites/png/buttons/play_again_button.png"), x=520, y=300)
+            menu_button = Button(image=pygame.image.load(
+                "assets/sprites/png/buttons/menu_button.png"), x=520, y=400)
+            quit_button = Button(image=pygame.image.load(
+                "assets/sprites/png/buttons/quit_button.png"), x=520, y=500)
             # position de la souris
             mouse_position = pygame.mouse.get_pos()
 
@@ -34,7 +36,7 @@ class GameOver:
             menu_button.update(self.screen)
             quit_button.update(self.screen)
 
-            #instancie menu
+            # instancie menu
             menu = Menu(self.screen)
             # on verifie quel bouton à été cliqué
             for event in pygame.event.get():

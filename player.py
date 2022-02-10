@@ -9,6 +9,7 @@ class Player:
             "assets/sprites/png/characters/knight.png")
         self.rect = self.image.get_rect(x=x, y=y)
         self.speed = 10
+        self.currentSpeed = self.speed
         self.velocity = [0, 0]
         # dash
         self.dashsAvailable = 0
@@ -38,17 +39,17 @@ class Player:
     def update(self):
         if self.isDashing:
             if pygame.time.get_ticks() > self.dashUseMoment + 300:
-                self.speed = self.speed / 2
+                self.currentSpeed = self.speed
                 self.isDashing = False
         if self.isBouncing:
-            if pygame.time.get_ticks() > self.bounceMoment + 100:
+            if pygame.time.get_ticks() > self.bounceMoment + 20:
                 self.isBouncing = False
 
         self.move()
 
     def move(self):
         self.game.terrain.move(-(self.velocity[0] *
-                               self.speed), -(self.velocity[1] * self.speed))
+                               self.currentSpeed), -(self.velocity[1] * self.currentSpeed))
 
     def bounce(self):
         self.isBouncing = True
@@ -67,7 +68,7 @@ class Player:
         self.speed = self.speed+2
 
     def dash(self):
-        self.speed = self.speed*2
+        self.currentSpeed = self.speed*2
         # get the moment when the dash was used
         self.dashUseMoment = pygame.time.get_ticks()
         self.isDashing = True

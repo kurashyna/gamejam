@@ -137,8 +137,9 @@ class Projectile(TerrainElement):
         self.creationTime = creationTime
         self.expirationDate = 10000
         x = -200
-        y = random.randrange(-400, game.screen.get_size()[1]+200)
-        self.velocity = 6
+        y = random.randrange(random.randrange(-800, -400),
+                             game.screen.get_size()[1]+200)
+        self.velocity = random.randrange(6, 10)
         scale = 2
         folder = "assets/sprites/png/terrain/projectiles/"
         filename = "laser"
