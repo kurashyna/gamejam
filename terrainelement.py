@@ -65,6 +65,8 @@ class Fruit(TerrainElement):
             filename = "pear"
         elif randomfruit == 1:
             filename = "apple"
+        elif randomfruit == 2:
+            filename = "cherry"
 
         TerrainElement.__init__(self, x, y, scale, folder, filename)
 
@@ -77,6 +79,9 @@ class Fruit(TerrainElement):
             elif self.randomfruit == 1:
                 player.mouvementspeedbuff()
                 scoreAmount = 4
+            elif self.randomfruit == 2:
+                player.recoveryhp()
+                scoreAmount = 2
             player.addScore(scoreAmount)
             self.getEaten()
 

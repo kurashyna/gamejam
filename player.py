@@ -127,3 +127,6 @@ class Player:
         self.hud.loseHP(1)
         if self.currentHP <= 0:
             self.game.gameOver()
+    def recoveryhp(self):
+        self.currentHP = self.currentHP +1
+        self.hud.gainHP(1)

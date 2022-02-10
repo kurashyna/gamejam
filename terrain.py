@@ -11,8 +11,7 @@ class Terrain:
         self.projectiles = []
         self.obstacles = [
             Obstacle(self, random.randrange(0, 4400), random.randrange(0, 2800), 5, "mill"), Obstacle(self, random.randrange(0, 4400), random.randrange(0, 2800), 5, "mill"), Obstacle(self, random.randrange(0, 4400), random.randrange(0, 2800), 5, "mill"), Obstacle(self, random.randrange(0, 4400), random.randrange(0, 2800), 5, "mill"), Obstacle(self, random.randrange(0, 4400), random.randrange(0, 2800), 5, "mill"), Obstacle(self, random.randrange(0, 4400), random.randrange(0, 2800), 5, "mill"), Obstacle(self, random.randrange(0, 4400), random.randrange(0, 2800), 5, "mill")]
-        self.fruits = [Fruit(self, 700, 200, 1, 0), Fruit(self, 300, 200, 1, 0), Fruit(self, 350, 220, 1, 0), Fruit(
-            self, 400, 200, 1, 1), Fruit(self, 800, 200, 1, 1), Fruit(self, 1000, 200, 1, 1)]
+        self.fruits = []
         self.terrainElements = [self.ground,
                                 self.obstacles, self.effects, self.fruits, self.projectiles]
 
