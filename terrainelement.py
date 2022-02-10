@@ -174,7 +174,7 @@ class Projectile(TerrainElement):
         else :
             currentTime = pygame.time.get_ticks()
             print(pygame.time.get_ticks())
-            if currentTime > 15000 :
+            if currentTime > currentTime+15000 :
                 self.freeze = False
     def delete(self):
         self.game.terrain.projectiles.remove(self)

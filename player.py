@@ -143,7 +143,6 @@ class Player:
 
     def freezeAll(self) :
         print("freeze")
-
         for projectile in self.game.terrain.terrainElements[4] :
             projectile.freeze = True
         self.freezeAllAvailable =self.freezeAllAvailable-1

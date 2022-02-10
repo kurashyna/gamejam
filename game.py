@@ -50,7 +50,7 @@ class Game:
             self.clock.tick(60)
 
     def gameOver(self):
-        file = shelve.open('highscore/highscore')
+        file = shelve.open('highscore/highscore.dat')
         if self.hud.score.value > file['score']:
             file['score'] = self.hud.score.value
         print(file['score'])
