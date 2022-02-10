@@ -22,7 +22,7 @@ class Environment:
         self.lastTimeFruitAppear = 0
         self.groundrect = (self.game.terrain.ground.rect)
         self.lastTimeLazerWasShot = 0
-        self.lazerSpawnDelay = 300
+        self.lazerSpawnDelay = 200
 
     def update(self):
         currentTime = pygame.time.get_ticks()
