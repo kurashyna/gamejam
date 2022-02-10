@@ -49,7 +49,7 @@ class Environment:
                 self.lastTimeMeteorStartedFalling = currentTime
                 self.appearMeteor()
         if self.dayOrNight == "day":
-            if currentTime > self.lastTimeFruitAppear + 5000:
+            if currentTime > self.lastTimeFruitAppear + 1000:
                 self.lastTimeFruitAppear = currentTime
                 self.appearFruit()
 
