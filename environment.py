@@ -67,11 +67,13 @@ class Environment:
             self.music = pygame.mixer.music.load(
                 "assets/sounds/music/night.mp3")
             pygame.mixer.music.play(-1)  # change the music
+            self.color = (83, 64, 26)
             self.dayOrNight = "night"
         else:
             # change to day
             self.music = pygame.mixer.music.load("assets/sounds/music/day.mp3")
             pygame.mixer.music.play(-1)  # change the music
+            self.color = (173, 188, 58)
             self.dayOrNight = "day"
             pygame.mixer.music.play(0)
             # increase difficulty for next night

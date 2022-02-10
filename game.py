@@ -39,7 +39,7 @@ class Game:
         self.hud.update()
 
     def display(self):
-        self.screen.fill((173, 188, 58))
+        self.screen.fill(self.environment.color)
         self.terrain.draw(self.screen)
         self.player.draw(self.screen)
         self.hud.draw(self.screen)
@@ -58,11 +58,7 @@ class Game:
         #     file['score'] = self.hud.score.value
         # print(file['score'])
         # file.close()
-
-        # print("t nul")
-        
         self.menu.game_over()
-
         pygame.quit() #quit the intro when starting the game
 
 
