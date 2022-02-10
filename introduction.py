@@ -2,8 +2,9 @@ import pygame
 from button import Button
 from menu import Menu
 
+
 class Intro:
-    def __init__(self, screen ):
+    def __init__(self, screen):
         self.screen = screen
 
     def view_1(self):
@@ -101,7 +102,6 @@ class Intro:
             cadre = pygame.image.load('assets/sprites/png/intro/Intro-3.png')
             self.screen.blit(cadre, (140, 10))
 
-
             skip_button = Button(image=pygame.image.load(
                 "assets/sprites/png/buttons/skip_button_view3.png"), x=420, y=600)
             continue_button = Button(image=pygame.image.load(
@@ -166,6 +166,7 @@ class Intro:
             pygame.display.update()
 
         pygame.quit()
+
 
 pygame.init()
 screen = pygame.display.set_mode((1080, 720))

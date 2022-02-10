@@ -70,12 +70,14 @@ class Fruit(TerrainElement):
 
     def update(self, player):
         if self.rect.colliderect(player.rect):
+
             if self.randomfruit == 0:
                 player.addDash()
-                print("mangé")
+                scoreAmount = 2
             elif self.randomfruit == 1:
                 player.mouvementspeedbuff()
-
+                scoreAmount = 4
+            player.addScore(scoreAmount)
             self.getEaten()
 
     def getEaten(self):
@@ -133,10 +135,10 @@ class Projectile(TerrainElement):
     def __init__(self, game, creationTime):
         self.game = game
         self.creationTime = creationTime
-        self.expirationDate = 2000
+        self.expirationDate = 10000
         x = -200
         y = random.randrange(-400, game.screen.get_size()[1]+200)
-        self.velocity = 10
+        self.velocity = 6
         scale = 2
         folder = "assets/sprites/png/terrain/projectiles/"
         filename = "laser"

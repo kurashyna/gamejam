@@ -12,8 +12,10 @@ class Score:
         ).right - 200, pygame.display.get_surface().get_rect().top + 50)
 
     def update(self):
-        self.value = pygame.time.get_ticks()
         self.text = self.font.render(str(self.value), True, self.white)
 
     def draw(self, screen):
         screen.blit(self.text, self.textRect)
+
+    def addValue(self, valueToAdd):
+        self.value += valueToAdd

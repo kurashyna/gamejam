@@ -2,6 +2,7 @@ import pygame
 from game import Game
 from button import Button
 
+
 class Menu:
 
     def __init__(self, screen):
@@ -57,7 +58,6 @@ class Menu:
             pygame.display.update()
         pygame.quit()
 
-
     def options(self):
         running = True
         while running:
@@ -91,7 +91,6 @@ class Menu:
 
             pygame.display.update()
 
-
     def play(self):
         pygame.display.set_caption("Devil Fruit")
         logo_icon = pygame.image.load('assets/sprites/png/title.png')
@@ -107,9 +106,8 @@ class Menu:
                     running = False
 
 
-
-pygame.init()
-screen = pygame.display.set_mode((1080, 720))
-menu = Menu(screen)  # instantiation de l'objet
-menu.main_menu()
-pygame.quit()
+# pygame.init()
+# screen = pygame.display.set_mode((1080, 720))
+# menu = Menu(screen)  # instantiation de l'objet
+# menu.main_menu()
+# pygame.quit()

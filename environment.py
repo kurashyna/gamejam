@@ -13,7 +13,7 @@ class Environment:
         self.dayTime = 5000
         self.dayOrNight = "night"
         self.toggleDay()
-        self.lastTimeChanged = 0
+        self.lastTimeChanged = pygame.time.get_ticks()
         self.lastTimeMeteorStartedFalling = 0
         self.lastTimeMeteorFalled = 0
         self.delayBeforeFalling = 1000
@@ -49,7 +49,7 @@ class Environment:
                 self.lastTimeMeteorStartedFalling = currentTime
                 self.appearMeteor()
         if self.dayOrNight == "day":
-            if currentTime > self.lastTimeFruitAppear + 5000:
+            if currentTime > self.lastTimeFruitAppear + 1000:
                 self.lastTimeFruitAppear = currentTime
                 self.appearFruit()
 
@@ -63,11 +63,15 @@ class Environment:
 
     def toggleDay(self):
         if self.dayOrNight == "day":
+            # change to night
             self.music = pygame.mixer.music.load(
                 "assets/sounds/music/night.mp3")
             pygame.mixer.music.play(-1)  # change the music
             self.dayOrNight = "night"
+            self.game.hud.score.addValue(
+                self.game.hud.score.value)  # doubles the score
         else:
+            # change to day
             self.music = pygame.mixer.music.load("assets/sounds/music/day.mp3")
             pygame.mixer.music.play(-1)  # change the music
             self.dayOrNight = "day"
