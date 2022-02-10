@@ -15,7 +15,7 @@ class Menu:
 
         # cadre fond
         cadre = pygame.image.load('assets/sprites/png/intro/Intro-1.png')
-        self.screen.blit(cadre, (100, 10))
+        self.screen.blit(cadre, (100, 25))
 
         logo = pygame.image.load('assets/sprites/png/intro/title_huge.png')
         self.screen.blit(logo, (175, 80))
@@ -25,6 +25,8 @@ class Menu:
             "assets/sprites/png/buttons/start_button.png"), x=510, y=450)
         play_now_button = Button(image=pygame.image.load(
             "assets/sprites/png/buttons/play_now_button.png"), x=510, y=550)
+        rules_button = Button(image=pygame.image.load(
+            "assets/sprites/png/buttons/rules_button.png"), x=510, y=650)
         running = True
 
 
@@ -32,6 +34,7 @@ class Menu:
             mouse_position = pygame.mouse.get_pos()
             start_button.update(self.screen)
             play_now_button.update(self.screen)
+            rules_button.update(self.screen)
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     running = False
@@ -41,6 +44,8 @@ class Menu:
                         self.view_2()
                     if play_now_button.buttonClicked(mouse_position):
                         self.startGame()
+                    if rules_button.buttonClicked(mouse_position):
+                        self.rules_1()
 
             pygame.display.update()
 
@@ -55,12 +60,12 @@ class Menu:
 
         # cadre fond
         cadre = pygame.image.load('assets/sprites/png/intro/Intro-2.png')
-        self.screen.blit(cadre, (140, 10))
+        self.screen.blit(cadre, (100, 25))
 
         continue_button = Button(image=pygame.image.load(
-            "assets/sprites/png/buttons/continue_button.png"), x=700, y=600)
+            "assets/sprites/png/buttons/continue_button.png"), x=650, y=600)
         skip_button = Button(image=pygame.image.load(
-            "assets/sprites/png/buttons/skip_button_view2.png"), x=420, y=600)
+            "assets/sprites/png/buttons/skip_button_view2.png"), x=380, y=600)
         running = True
         while (running):
             
@@ -92,12 +97,12 @@ class Menu:
 
         # cadre fond
         cadre = pygame.image.load('assets/sprites/png/intro/Intro-3.png')
-        self.screen.blit(cadre, (140, 10))
+        self.screen.blit(cadre, (100, 25))
 
         skip_button = Button(image=pygame.image.load(
-            "assets/sprites/png/buttons/skip_button_view3.png"), x=420, y=600)
+            "assets/sprites/png/buttons/skip_button_view3.png"), x=380, y=600)
         continue_button = Button(image=pygame.image.load(
-            "assets/sprites/png/buttons/continue_button_view3.png"), x=700, y=600)
+            "assets/sprites/png/buttons/continue_button_view3.png"), x=650, y=600)
         running = True
         while (running):
            
@@ -131,12 +136,12 @@ class Menu:
 
         # cadre fond
         cadre = pygame.image.load('assets/sprites/png/intro/Intro-4.png')
-        self.screen.blit(cadre, (140, 10))
+        self.screen.blit(cadre, (100, 25))
 
         main_menu_button = Button(image=pygame.image.load(
-            "assets/sprites/png/buttons/main_menu_button.png"), x=420, y=600)
+            "assets/sprites/png/buttons/main_menu_button.png"), x=380, y=600)
         start_button = Button(image=pygame.image.load(
-            "assets/sprites/png/buttons/Start_Game_button.png"), x=700, y=600)
+            "assets/sprites/png/buttons/Start_Game_button.png"), x=650, y=600)
 
         running = True
         while (running):
@@ -148,11 +153,8 @@ class Menu:
                     running = False
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     if main_menu_button.buttonClicked(mouse_position):
-                        print("menu")
                         self.view_1()
-
                     if start_button.buttonClicked(mouse_position):
-                        print("gaming")
                         self.startGame()
 
 
@@ -223,7 +225,76 @@ class Menu:
         score = font.render(("Score :" + score_val), True, (255, 255, 255))
         highscore = font.render(("Highscore :" + highscoreVal), True, (255, 255, 255))
         self.screen.blit(score,(score_x, score_y)) 
-        self.screen.blit(highscore,(highscore_x, highscore_y)) 
+        self.screen.blit(highscore,(highscore_x, highscore_y))
+
+    #rules
+    def rules_1(self):
+        pygame.display.set_caption('Devil Fruits')
+        logo_icon = pygame.image.load('assets/sprites/png/title.png')
+        pygame.display.set_icon(logo_icon)
+
+        self.screen.fill((0, 0, 0))
+
+        # cadre fond
+        cadre = pygame.image.load('assets/sprites/png/intro/rules1.png')
+        self.screen.blit(cadre, (100, 25))
+
+        # boutons
+        next_button = Button(image=pygame.image.load(
+            "assets/sprites/png/buttons/next_button.png"), x=650, y=620)
+        menu_button = Button(image=pygame.image.load(
+            "assets/sprites/png/buttons/menu_button.png"), x=380, y=620)
+        running = True
+
+
+        while (running):
+            mouse_position = pygame.mouse.get_pos()
+            next_button.update(self.screen)
+            menu_button.update(self.screen)
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    running = False
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    # Pour Start game button
+                    if next_button.buttonClicked(mouse_position):
+                        self.rules_2()
+                    if menu_button.buttonClicked(mouse_position):
+                        self.view_1()
+
+            pygame.display.update()
+
+        pygame.quit()
+
+    def rules_2(self):
+        pygame.display.set_caption('Devil Fruits')
+        logo_icon = pygame.image.load('assets/sprites/png/title.png')
+        pygame.display.set_icon(logo_icon)
+
+        self.screen.fill((0, 0, 0))
+
+        # cadre fond
+        cadre = pygame.image.load('assets/sprites/png/intro/rules2.png')
+        self.screen.blit(cadre, (100, 25))
+
+        # boutons
+        menu_button = Button(image=pygame.image.load(
+            "assets/sprites/png/buttons/menu_button.png"), x=500, y=600)
+        running = True
+
+
+        while (running):
+            mouse_position = pygame.mouse.get_pos()
+            menu_button.update(self.screen)
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    running = False
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    # Pour Start game button
+                    if menu_button.buttonClicked(mouse_position):
+                        self.view_1()
+            pygame.display.update()
+
+        pygame.quit()
 
 pygame.init()
 screen = pygame.display.set_mode((1024, 768))
