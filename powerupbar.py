@@ -12,7 +12,7 @@ class PowerUpBar:
             700 + (player.dashsAvailable*self.offset), 600))
     def addFreeze(self,player):
         self.freezeCharges.append(FreezeCharge(
-        700 + (player.dashsAvailable*self.offset), 500))
+        700 + (player.freezeAllAvailable*self.offset), 500))
     def removeDash(self):
         self.dashCharges.pop()
     def removeFreeze(self):
@@ -35,7 +35,7 @@ class DashCharge:
 class FreezeCharge:
     def __init__(self, x, y):
         self.image = pygame.image.load(
-            "assets/sprites/png/hud/pear.png")
+            "assets/sprites/png/hud/banana.png")
         self.rect = self.image.get_rect(x=x, y=y)
 
     def draw(self, screen):

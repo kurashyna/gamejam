@@ -143,9 +143,8 @@ class Player:
 
     def freezeAll(self) :
         print("freeze")
-        self.game.terrain.freeze = True
 
         for projectile in self.game.terrain.terrainElements[4] :
             projectile.freeze = True
-            currentTime = pygame.time.get_ticks()
+        self.freezeAllAvailable =self.freezeAllAvailable-1
         self.game.hud.powerUpBar.removeFreeze()

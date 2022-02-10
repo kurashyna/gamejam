@@ -34,7 +34,7 @@ class Environment:
         # make meteors fall
 
         # le meteor a commencé mais n'a pas fini de tomber
-        if self.lastTimeMeteorStartedFalling > self.lastTimeMeteorFalled  and self.game.terrain.freeze==False:
+        if self.lastTimeMeteorStartedFalling > self.lastTimeMeteorFalled :
             if currentTime > self.lastTimeMeteorStartedFalling + self.delayBeforeFalling:
                 self.fallMeteor()
                 self.lastTimeMeteorFalled = currentTime
@@ -46,7 +46,7 @@ class Environment:
 
         elif self.dayOrNight == "night":
             # no meteor is currently falling
-            if currentTime > self.lastTimeMeteorStartedFalling + self.delayBetweenMeteor and self.game.terrain.freeze==False:
+            if currentTime > self.lastTimeMeteorStartedFalling + self.delayBetweenMeteor:
                 self.lastTimeMeteorStartedFalling = currentTime
                 self.appearMeteor()
         if self.dayOrNight == "day":
@@ -57,7 +57,7 @@ class Environment:
         # lazers
         for lazer in self.game.terrain.projectiles:
             lazer.update(self.game.player)
-        if self.dayOrNight == "night" and currentTime > self.lastTimeLazerWasShot + self.lazerSpawnDelay and self.game.terrain.freeze==False:
+        if self.dayOrNight == "night" and currentTime > self.lastTimeLazerWasShot + self.lazerSpawnDelay:
             self.game.terrain.projectiles.append(
                 Projectile(self.game, currentTime, self.lazerMinSpeed))
             self.lastTimeLazerWasShot = currentTime

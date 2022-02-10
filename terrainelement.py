@@ -64,7 +64,7 @@ class Obstacle(TerrainElement):
 class Fruit(TerrainElement):
     def __init__(self, terrain, x, y, scale, dayOrNight):
         self.dayOrNight = dayOrNight
-        self.randomfruit = random.randrange(0, 3)
+        self.randomfruit = random.randrange(0, 4)
         self.terrain = terrain
         folder = "assets/sprites/png/terrain/fruits/"
         if self.randomfruit == 0:
@@ -73,6 +73,8 @@ class Fruit(TerrainElement):
             filename = "apple"
         elif self.randomfruit == 2:
             filename = "cherry"
+        elif self.randomfruit == 3:
+            filename = "banana"
 
         TerrainElement.__init__(self, x, y, scale, folder, filename)
 
