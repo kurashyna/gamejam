@@ -142,14 +142,13 @@ class MeteorShadow(TerrainElement):
 
 
 class Projectile(TerrainElement):
-    def __init__(self, game, creationTime):
+    def __init__(self, game, creationTime, minSpeed):
         self.game = game
         self.creationTime = creationTime
         self.expirationDate = 10000
-        x = -200
-        y = random.randrange(random.randrange(-800, -400),
-                             game.screen.get_size()[1]+200)
-        self.velocity = random.randrange(6, 10)
+        x = random.randrange(-800, -400)
+        y = random.randrange(-400, game.screen.get_size()[1]+200)
+        self.velocity = random.randrange(minSpeed, minSpeed + 4)
         scale = 2
         folder = "assets/sprites/png/terrain/projectiles/"
         filename = "laser"
