@@ -9,8 +9,14 @@ class Terrain:
         self.ground = Ground(0, 0)
         self.effects = []
         self.projectiles = []
-        self.obstacles = [
-            Obstacle(self, random.randrange(0, 4400), random.randrange(0, 2800), 5, "mill"), Obstacle(self, random.randrange(0, 4400), random.randrange(0, 2800), 5, "mill"), Obstacle(self, random.randrange(0, 4400), random.randrange(0, 2800), 5, "mill"), Obstacle(self, random.randrange(0, 4400), random.randrange(0, 2800), 5, "mill"), Obstacle(self, random.randrange(0, 4400), random.randrange(0, 2800), 5, "mill"), Obstacle(self, random.randrange(0, 4400), random.randrange(0, 2800), 5, "mill"), Obstacle(self, random.randrange(0, 4400), random.randrange(0, 2800), 5, "mill")]
+        self.obstacles = []
+        for i in range(7):
+            while True:
+                newObstacle = Obstacle(self, random.randrange(0, 4400), random.randrange(0, 2800), 5, "mill")
+                # so that the player doesnt spawn in an obstacle
+                if not newObstacle.rect.colliderect(player.rect):
+                    break
+            self.obstacles.append(newObstacle)
         self.fruits = []
         self.terrainElements = [self.ground,
                                 self.obstacles, self.effects, self.fruits, self.projectiles]
