@@ -50,15 +50,15 @@ class Game:
             self.clock.tick(60)
 
     def gameOver(self):
-        file = shelve.open('highscore/highscore.dat')
-        if self.hud.score.value > file['score']:
-            file['score'] = self.hud.score.value
-        print(file['score'])
-        file.close()
+        # file = shelve.open('highscore/highscore.dat')
+        # if self.hud.score.value > file['score']:
+        #     file['score'] = self.hud.score.value
+        # print(file['score'])
+        # file.close()
 
-        print("t nul")
-        # m = menu.Menu(self.screen)
-        # m.game_over()
+        # print("t nul")
+        m = menu.Menu(self.screen)
+        m.game_over()
 
     def getTerrain(self):
         return self.terrain
