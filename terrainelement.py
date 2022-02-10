@@ -107,7 +107,7 @@ class Smoke(TerrainElement):
 
 class MeteorShadow(TerrainElement):
     def __init__(self, x, y):
-        scale = random.randrange(7,15)
+        scale = random.randrange(7, 15)
         folder = "assets/sprites/png/smoke_animation/"
 
         self.lastTimeFrameChanged = 0
@@ -118,12 +118,20 @@ class MeteorShadow(TerrainElement):
 
 
 class Projectile(TerrainElement):
-    def __init__(self, x, y):
-        self.x = x
-        self.y = y
-        self.color = (255, 255, 255)
-        self.velocity = 8
+    def __init__(self, game, creationTime):
+        self.game = game
+        self.creationTime = creationTime
+        x = -200
+        y = random.randrange(-200, game.screen.get_size()[1]+200)
+        self.velocity = 16
         scale = 2
         folder = "assets/sprites/png/terrain/projectiles/"
         filename = "laser"
         TerrainElement.__init__(self, x, y, scale, folder, filename)
+
+    def update(self, player):
+        self.rect.move_ip(self.velocity, 0)
+        if self.rect.colliderect(player.rect):
+            player.loseHP()
+            # projectile deletes itself when it touches character
+            self.game.terrain.projectiles.remove(self)

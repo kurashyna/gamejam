@@ -13,6 +13,10 @@ class Healthbar:
         for hearth in self.hearths:
             hearth.draw(screen)
 
+    def loseHP(self, amount):
+        for i in range(amount):
+            self.hearths.pop()
+
 
 class Hearth:
     def __init__(self, x, y):

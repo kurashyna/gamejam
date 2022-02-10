@@ -4,6 +4,7 @@ import pygame
 class Player:
     def __init__(self, game, x, y):
         self.game = game
+        self.hud = game.hud
         self.image = pygame.image.load(
             "assets/sprites/png/characters/knight.png")
         self.rect = self.image.get_rect(x=x, y=y)
@@ -15,7 +16,7 @@ class Player:
         self.isDashing = False
         self.isBouncing = False
         self.bounceMoment = 0
-        self.maxHP = 8
+        self.maxHP = 4
         self.currentHP = self.maxHP  # start with healthbar full
 
     def handle_events(self, event):
@@ -57,8 +58,7 @@ class Player:
 
     def addDash(self):
         self.dashsAvailable += 1
-        print(self.dashsAvailable)
-        self.game.hud.powerUpBar.addDash()  # add the dash icon to the hud
+        self.game.hud.powerUpBar.addDash(self)  # add the dash icon to the hud
 
     def dash(self):
         self.speed = self.speed*2
@@ -70,3 +70,10 @@ class Player:
 
     def draw(self, screen):
         screen.blit(self.image, self.rect)
+
+    def loseHP(self):
+        self.currentHP = self.currentHP - 1
+        if self.currentHP <= 0:
+            self.game.gameOver()
+        else:
+            self.hud.loseHP(1)

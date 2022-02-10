@@ -10,8 +10,8 @@ class Game:
         self.screen = screen
         self.running = True
         self.clock = pygame.time.Clock()
-        self.player = Player(self, 500, 360)
         self.hud = HUD(screen, self)
+        self.player = Player(self, 500, 360)
         self.terrain = Terrain(self, self.player)
         self.environment = Environment(self)
         # booleans used to prevent diagonal movement
@@ -45,9 +45,5 @@ class Game:
             self.display()
             self.clock.tick(60)
 
-
-# pygame.init()
-# screen = pygame.display.set_mode((1080, 720))
-# game = Game(screen)  # instantiation de l'objet
-# game.run()  # lancement du jeu
-# pygame.quit()
+    def gameOver(self):
+        print("t nul")

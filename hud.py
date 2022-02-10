@@ -8,9 +8,8 @@ from score import Score
 class HUD:
     # contient tous les elements de l'hud: hp, mana...
     def __init__(self, screen, game):
-        self.player = game.player
         self.healthbar = Healthbar()
-        self.powerUpBar = PowerUpBar(game.player)
+        self.powerUpBar = PowerUpBar()
         self.rect = screen.get_rect()
         self.score = Score()
 
@@ -21,3 +20,6 @@ class HUD:
 
     def update(self):
         self.score.update()
+
+    def loseHP(self, amount):
+        self.healthbar.loseHP(amount)

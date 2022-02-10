@@ -1,5 +1,6 @@
 from asyncio.windows_events import NULL
 import random
+from turtle import screensize
 import pygame
 
 from terrain import Terrain
@@ -18,9 +19,9 @@ class Environment:
         self.delayBeforeFalling = 500
         self.meteorShadow = NULL
         self.delayBetweenMeteor = 2000
-        self.fruit = NULL
         self.lastTimeFruitAppear = 0
         self.groundrect = (self.game.terrain.ground.rect)
+        self.lastTimeLazerWasShot = 0
 
     def update(self):
         currentTime = pygame.time.get_ticks()
@@ -51,6 +52,15 @@ class Environment:
                 self.lastTimeFruitAppear = currentTime
                 self.appearFruit()
 
+        # lazers
+        for lazer in self.game.terrain.lazers:
+
+            lazer.update(self.game.player)
+        if self.dayOrNight == "night" and currentTime > self.lastTimeLazerWasShot + 100:
+            self.game.terrain.projectiles.append(
+                Projectile(self.game, currentTime))
+            self.lastTimeLazerWasShot = currentTime
+
     def toggleDay(self):
         if self.dayOrNight == "day":
             self.music = pygame.mixer.music.load(
@@ -63,7 +73,6 @@ class Environment:
             self.dayOrNight = "day"
             pygame.mixer.music.play(0)
         self.game.terrain.setSprites(self.dayOrNight)
-        print(self.dayOrNight)
 
     def fruitIsColliding(self, fruit):
         for obstacle in self.game.terrain.obstacles:
@@ -86,5 +95,5 @@ class Environment:
 
     def fallMeteor(self):
         self.game.terrain.obstacles.append(
-            Obstacle(self.game.terrain, self.meteorShadow.rect.x, self.meteorShadow.rect.y,random.randrange(7,15), "meteor"))
+            Obstacle(self.game.terrain, self.meteorShadow.rect.x, self.meteorShadow.rect.y, random.randrange(7, 15), "meteor"))
         self.game.terrain.effects.remove(self.meteorShadow)

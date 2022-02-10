@@ -2,15 +2,14 @@ import pygame
 
 
 class PowerUpBar:
-    def __init__(self, player):
+    def __init__(self):
         # healthbar is made of 4 hearths icons
-        self.player = player
         self.dashCharges = []
         self.offset = 60  # space between each hearth
 
-    def addDash(self):
+    def addDash(self, player):
         self.dashCharges.append(DashCharge(
-            700 + (self.player.dashsAvailable*self.offset), 600))
+            700 + (player.dashsAvailable*self.offset), 600))
 
     def removeDash(self):
         self.dashCharges.pop()
