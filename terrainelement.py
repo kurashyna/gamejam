@@ -139,14 +139,14 @@ class Smoke(TerrainElement):
 
 class MeteorShadow(TerrainElement):
     def __init__(self, x, y):
-        scale = random.randrange(7, 15)
+        self.scale = random.randrange(7, 15)
         folder = "assets/sprites/png/smoke_animation/"
 
         self.lastTimeFrameChanged = 0
         self.currentFrame = 0
         # filename = "smoke_" + str(self.currentFrame)
         filename = "meteor_shadow"
-        TerrainElement.__init__(self, x, y, scale, folder, filename)
+        TerrainElement.__init__(self, x, y, self.scale, folder, filename)
 
 
 class Projectile(TerrainElement):

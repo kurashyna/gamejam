@@ -19,12 +19,8 @@ class Healthbar:
             self.hearths.pop()
 
     def gainHP(self, amount):
-        for i in range(amount):
-            x=1
-            for health in self.hearths:
-                x=x+1
-                print(x)
-            self.hearths.append(Hearth(40+(x*60), 600))
+        self.hearths.append(Hearth(100 + (len(self.hearths)*self.offset), 600))
+        print(len(self.hearths))
 
 
 class Hearth:

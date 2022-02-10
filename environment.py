@@ -105,7 +105,7 @@ class Environment:
 
     def fallMeteor(self):
         meteor = Obstacle(self.game.terrain, self.meteorShadow.rect.x,
-                          self.meteorShadow.rect.y, random.randrange(7, 15), "meteor")
+                          self.meteorShadow.rect.y, self.meteorShadow.scale, "meteor")
         self.game.terrain.obstacles.append(meteor)
         self.game.terrain.effects.remove(self.meteorShadow)
         # kill if player under it

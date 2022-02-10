@@ -60,7 +60,7 @@ class Terrain:
                 if not newObstacle.rect.colliderect(player.rect) and not isColliding:
                     break
             self.obstacles.append(newObstacle)
-        self.fruits = [Fruit(self, 100, 100, 1, "day"),Fruit(self, 150, 150, 1, "day"),Fruit(self, 200, 200, 1, "day"),Fruit(self, 250, 250, 1, "day")]
+        self.fruits = []
         self.terrainElements = [self.ground,
                                 self.obstacles, self.effects, self.fruits, self.projectiles]
 

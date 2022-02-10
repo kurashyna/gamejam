@@ -1,12 +1,10 @@
 import pygame
-# from gameover import GameOver
 from hud import HUD
-# from introduction import Intro
 from player import Player
 from terrain import Terrain
 from environment import Environment
 # import menu
-# import shelve
+import shelve
 
 
 
@@ -53,12 +51,19 @@ class Game:
             self.clock.tick(60)
 
     def gameOver(self):
-        # file = shelve.open('highscore/highscore.dat')
-        # if self.hud.score.value > file['score']:
-        #     file['score'] = self.hud.score.value
-        # print(file['score'])
-        # file.close()
-        self.menu.game_over()
+        file = shelve.open('highscore/highscore.dat')
+        if "score" in file:
+            if self.hud.score.value > file['score']:
+                highscoreVal = self.hud.score.value
+            else:
+                highscoreVal = file['score']
+        else:
+            highscoreVal = self.hud.score.value
+        file['score'] = highscoreVal
+        print(file['score'])
+        file.close()
+
+        self.menu.game_over(self.hud.score.value, highscoreVal)
         pygame.quit() #quit the intro when starting the game
 
 
