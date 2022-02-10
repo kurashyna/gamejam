@@ -111,7 +111,7 @@ class Menu:
 
     def display_score(self,score_val):
         #coordonnées
-        score_x, score_y = 200, 550
+        score_x, score_y = 200, 250
         #conversion en str
         score_val= str(score_val)
         font = pygame.font.Font('freesansbold.ttf', 30)
@@ -135,8 +135,8 @@ class Menu:
             self.screen.blit(Text, (200, 100))
 
             #recupere le score
-            self.score = self.game.hud.score.value
-            self.display_score(self.score)
+            # self.score = self.game.hud.score.value
+            # self.display_score(self.score)
 
             # boutons
             play_again_button = Button(image=pygame.image.load(
