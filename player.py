@@ -142,9 +142,8 @@ class Player:
         self.currentHP = self.currentHP + 1
         self.hud.gainHP(1)
 
-    def freezeAll(self) :
-        print("freeze")
-        for projectile in self.game.terrain.terrainElements[4] :
-            projectile.freeze = True
-        self.freezeAllAvailable =self.freezeAllAvailable-1
+    def freezeAll(self):
+        for projectile in self.game.terrain.terrainElements[4]:
+            projectile.freezeTime()
+        self.freezeAllAvailable = self.freezeAllAvailable-1
         self.game.hud.powerUpBar.removeFreeze()

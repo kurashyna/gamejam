@@ -161,9 +161,10 @@ class Projectile(TerrainElement):
         folder = "assets/sprites/png/terrain/projectiles/"
         filename = "laser"
         TerrainElement.__init__(self, x, y, scale, folder, filename)
+        self.freezed = False
 
     def update(self, player):
-        if self.freeze == False :
+        if self.freezed == False :
             self.rect.move_ip(self.velocity, 0)
             if self.rect.colliderect(player.rect):
                 player.loseHP()
@@ -173,8 +174,12 @@ class Projectile(TerrainElement):
                 self.delete()
         else :
             currentTime = pygame.time.get_ticks()
-            print(pygame.time.get_ticks())
-            if currentTime > currentTime+15000 :
-                self.freeze = False
+            if currentTime > self.freezeTimeMoment+3000:
+                self.freezed = False
+
+    def freezeTime(self):
+        self.freezed = True
+        self.freezeTimeMoment = pygame.time.get_ticks()
+
     def delete(self):
         self.game.terrain.projectiles.remove(self)
