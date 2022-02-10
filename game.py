@@ -3,12 +3,13 @@ from hud import HUD
 from player import Player
 from terrain import Terrain
 from environment import Environment
-from gameover import GameOver
+import menu
 import shelve
 
 
 
 class Game:
+
     def __init__(self, screen):  # constructeur
         self.screen = screen
         self.running = True
@@ -49,12 +50,15 @@ class Game:
             self.clock.tick(60)
 
     def gameOver(self):
-        file = shelve.open('highscore/highscore')
+        file = shelve.open('highscore/highscore.dat')
         if self.hud.score.value > file['score']:
             file['score'] = self.hud.score.value
         print(file['score'])
         file.close()
 
         print("t nul")
-        # end = GameOver(self.screen)
-        # end.game_over()
+        # m = menu.Menu(self.screen)
+        # m.game_over()
+
+    def getTerrain(self):
+        return self.terrain

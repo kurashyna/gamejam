@@ -34,7 +34,7 @@ class Environment:
         # make meteors fall
 
         # le meteor a commencé mais n'a pas fini de tomber
-        if self.lastTimeMeteorStartedFalling > self.lastTimeMeteorFalled:
+        if self.lastTimeMeteorStartedFalling > self.lastTimeMeteorFalled :
             if currentTime > self.lastTimeMeteorStartedFalling + self.delayBeforeFalling:
                 self.fallMeteor()
                 self.lastTimeMeteorFalled = currentTime

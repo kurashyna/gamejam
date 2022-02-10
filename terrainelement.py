@@ -5,6 +5,7 @@ import random
 
 
 class TerrainElement(ABC):  # abstract class
+
     def __init__(self, x, y, scale, folder, filename):
         # made with a method so that it can be set in each class
         self.folder = folder
@@ -15,6 +16,7 @@ class TerrainElement(ABC):  # abstract class
 
         # self.setScale(self.scale)  # change the size of the object
         self.rect = self.image.get_rect(x=x, y=y)
+        self.freeze=False
 
     def nightOrDay(self):
         return "night"  # asteroids and lazers always fall at night so it defaults to night
@@ -54,14 +56,15 @@ class Obstacle(TerrainElement):
             terrain.effects.append(Smoke(terrain, x - 60, y - 80))
 
     def update(self, player):
-        if self.rect.colliderect(player.rect):
-            player.bounce()
+        if self.freeze == False :
+            if self.rect.colliderect(player.rect):
+                player.bounce()
 
 
 class Fruit(TerrainElement):
     def __init__(self, terrain, x, y, scale, dayOrNight):
         self.dayOrNight = dayOrNight
-        self.randomfruit = random.randrange(0, 3)
+        self.randomfruit = random.randrange(0, 4)
         self.terrain = terrain
         folder = "assets/sprites/png/terrain/fruits/"
         if self.randomfruit == 0:
@@ -70,6 +73,8 @@ class Fruit(TerrainElement):
             filename = "apple"
         elif self.randomfruit == 2:
             filename = "cherry"
+        elif self.randomfruit == 3:
+            filename = "banana"
 
         TerrainElement.__init__(self, x, y, scale, folder, filename)
 
@@ -87,6 +92,9 @@ class Fruit(TerrainElement):
                 scoreAmount = 4
             elif self.randomfruit == 2:
                 player.recoveryhp()
+                scoreAmount = 2
+            elif self.randomfruit == 3:
+                player.addFreezeall()
                 scoreAmount = 2
             player.addScore(scoreAmount)
             self.getEaten()
@@ -155,13 +163,18 @@ class Projectile(TerrainElement):
         TerrainElement.__init__(self, x, y, scale, folder, filename)
 
     def update(self, player):
-        self.rect.move_ip(self.velocity, 0)
-        if self.rect.colliderect(player.rect):
-            player.loseHP()
-            # projectile deletes itself when it touches character
-            self.delete()
-        if pygame.time.get_ticks() > self.creationTime + self.expirationDate:
-            self.delete()
-
+        if self.freeze == False :
+            self.rect.move_ip(self.velocity, 0)
+            if self.rect.colliderect(player.rect):
+                player.loseHP()
+                # projectile deletes itself when it touches character
+                self.delete()
+            if pygame.time.get_ticks() > self.creationTime + self.expirationDate:
+                self.delete()
+        else :
+            currentTime = pygame.time.get_ticks()
+            print(pygame.time.get_ticks())
+            if currentTime > currentTime+15000 :
+                self.freeze = False
     def delete(self):
         self.game.terrain.projectiles.remove(self)

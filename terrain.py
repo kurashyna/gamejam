@@ -60,7 +60,7 @@ class Terrain:
                 if not newObstacle.rect.colliderect(player.rect) and not isColliding:
                     break
             self.obstacles.append(newObstacle)
-        self.fruits = []
+        self.fruits = [Fruit(self, 100, 100, 1, "day"),Fruit(self, 150, 150, 1, "day"),Fruit(self, 200, 200, 1, "day"),Fruit(self, 250, 250, 1, "day")]
         self.terrainElements = [self.ground,
                                 self.obstacles, self.effects, self.fruits, self.projectiles]
 
@@ -74,12 +74,12 @@ class Terrain:
 
     def update(self, player):
         # detecte les collisions avec le joueur
-        for terrainElementList in self.terrainElements:  # iterate through all the terrainelements
-            if hasattr(terrainElementList, '__iter__'):  # if its iterable
-                for terrainElement in terrainElementList:
-                    terrainElement.update(player)
-            else:
-                terrainElementList.update(player)
+            for terrainElementList in self.terrainElements:  # iterate through all the terrainelements
+                if hasattr(terrainElementList, '__iter__'):  # if its iterable
+                    for terrainElement in terrainElementList:
+                        terrainElement.update(player)
+                else:
+                    terrainElementList.update(player)
 
     def draw(self, screen):
         for terrainElementList in self.terrainElements:  # iterate through all the terrainelements
