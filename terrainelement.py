@@ -56,23 +56,24 @@ class Obstacle(TerrainElement):
 
 class Fruit(TerrainElement):
     randomfruit = 1
-    def __init__(self, terrain, x, y, scale,randomfruit):
-        self.randomfruit=randomfruit
+
+    def __init__(self, terrain, x, y, scale, randomfruit):
+        self.randomfruit = randomfruit
         self.terrain = terrain
         folder = "assets/sprites/png/terrain/fruits/"
-        if randomfruit == 0 :
+        if randomfruit == 0:
             filename = "pear"
-        elif randomfruit == 1 :
+        elif randomfruit == 1:
             filename = "apple"
 
         TerrainElement.__init__(self, x, y, scale, folder, filename)
 
     def update(self, player):
         if self.rect.colliderect(player.rect):
-            if self.randomfruit ==0 :
+            if self.randomfruit == 0:
                 player.addDash()
-                print ("mangé")
-            elif self.randomfruit ==1 :
+                print("mangé")
+            elif self.randomfruit == 1:
                 player.mouvementspeedbuff()
 
             self.getEaten()
@@ -132,9 +133,10 @@ class Projectile(TerrainElement):
     def __init__(self, game, creationTime):
         self.game = game
         self.creationTime = creationTime
+        self.expirationDate = 2000
         x = -200
-        y = random.randrange(-200, game.screen.get_size()[1]+200)
-        self.velocity = 16
+        y = random.randrange(-400, game.screen.get_size()[1]+200)
+        self.velocity = 10
         scale = 2
         folder = "assets/sprites/png/terrain/projectiles/"
         filename = "laser"
@@ -145,4 +147,9 @@ class Projectile(TerrainElement):
         if self.rect.colliderect(player.rect):
             player.loseHP()
             # projectile deletes itself when it touches character
-            self.game.terrain.projectiles.remove(self)
+            self.delete()
+        if pygame.time.get_ticks() > self.creationTime + self.expirationDate:
+            self.delete()
+
+    def delete(self):
+        self.game.terrain.projectiles.remove(self)

@@ -16,12 +16,13 @@ class Environment:
         self.lastTimeChanged = 0
         self.lastTimeMeteorStartedFalling = 0
         self.lastTimeMeteorFalled = 0
-        self.delayBeforeFalling = 500
+        self.delayBeforeFalling = 1000
         self.meteorShadow = NULL
         self.delayBetweenMeteor = 2000
         self.lastTimeFruitAppear = 0
         self.groundrect = (self.game.terrain.ground.rect)
         self.lastTimeLazerWasShot = 0
+        self.lazerSpawnDelay = 200
 
     def update(self):
         currentTime = pygame.time.get_ticks()
@@ -54,9 +55,8 @@ class Environment:
 
         # lazers
         for lazer in self.game.terrain.projectiles:
-
             lazer.update(self.game.player)
-        if self.dayOrNight == "night" and currentTime > self.lastTimeLazerWasShot + 100:
+        if self.dayOrNight == "night" and currentTime > self.lastTimeLazerWasShot + self.lazerSpawnDelay:
             self.game.terrain.projectiles.append(
                 Projectile(self.game, currentTime))
             self.lastTimeLazerWasShot = currentTime
@@ -94,6 +94,10 @@ class Environment:
         self.game.terrain.fruits.append(newFruit)
 
     def fallMeteor(self):
-        self.game.terrain.obstacles.append(
-            Obstacle(self.game.terrain, self.meteorShadow.rect.x, self.meteorShadow.rect.y, random.randrange(7, 15), "meteor"))
+        meteor = Obstacle(self.game.terrain, self.meteorShadow.rect.x,
+                          self.meteorShadow.rect.y, random.randrange(7, 15), "meteor")
+        self.game.terrain.obstacles.append(meteor)
         self.game.terrain.effects.remove(self.meteorShadow)
+        # kill if player under it
+        if meteor.rect.colliderect(self.game.player.rect):
+            self.game.gameOver()

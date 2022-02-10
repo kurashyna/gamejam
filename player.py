@@ -61,7 +61,8 @@ class Player:
         self.game.hud.powerUpBar.addDash(self)  # add the dash icon to the hud
 
     def mouvementspeedbuff(self):
-        self.speed=self.speed+2
+        self.speed = self.speed+2
+
     def dash(self):
         self.speed = self.speed*2
         # get the moment when the dash was used
@@ -75,7 +76,6 @@ class Player:
 
     def loseHP(self):
         self.currentHP = self.currentHP - 1
+        self.hud.loseHP(1)
         if self.currentHP <= 0:
             self.game.gameOver()
-        else:
-            self.hud.loseHP(1)
