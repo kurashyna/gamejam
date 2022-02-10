@@ -1,7 +1,6 @@
 import pygame
 from button import Button
-from menu import Menu
-
+import menu
 
 class Intro:
     def __init__(self, screen):
@@ -35,7 +34,7 @@ class Intro:
             play_now_button.update(self.screen)
 
             # instancie menu
-            menu = Menu(self.screen)
+            m = menu.Menu(self.screen)
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     running = False
@@ -44,7 +43,7 @@ class Intro:
                     if start_button.buttonClicked(mouse_position):
                         self.view_2()
                     if play_now_button.buttonClicked(mouse_position):
-                        menu.play()
+                        m.play()
 
             pygame.display.update()
 
@@ -74,7 +73,7 @@ class Intro:
             skip_button.update(self.screen)
 
             # instancie menu
-            menu = Menu(self.screen)
+            m = menu.Menu(self.screen)
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     running = False
@@ -83,7 +82,7 @@ class Intro:
                     if continue_button.buttonClicked(mouse_position):
                         self.view_3()
                     if skip_button.buttonClicked(mouse_position):
-                        menu.main_menu()
+                        m.main_menu()
 
             pygame.display.update()
 
@@ -113,7 +112,7 @@ class Intro:
             skip_button.update(self.screen)
 
             # instancie menu
-            menu = Menu(self.screen)
+            m = menu.Menu(self.screen)
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     running = False
@@ -122,7 +121,7 @@ class Intro:
                     if continue_button.buttonClicked(mouse_position):
                         self.view_4()
                     if skip_button.buttonClicked(mouse_position):
-                        menu.main_menu()
+                        m.main_menu()
 
             pygame.display.update()
 
@@ -152,16 +151,16 @@ class Intro:
             start_button.update(self.screen)
 
             # instancie menu
-            menu = Menu(self.screen)
+            m = menu.Menu(self.screen)
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     running = False
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     # Pour Start game button
                     if start_button.buttonClicked(mouse_position):
-                        menu.play()
+                        m.play()
                     if start_button.buttonClicked(mouse_position):
-                        menu.main_menu()
+                        m.main_menu()
 
             pygame.display.update()
 

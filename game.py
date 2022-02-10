@@ -3,7 +3,7 @@ from hud import HUD
 from player import Player
 from terrain import Terrain
 from environment import Environment
-from gameover import GameOver
+import menu
 import shelve
 
 
@@ -57,7 +57,8 @@ class Game:
         file.close()
 
         print("t nul")
-        # end = GameOver(self.screen)
-        # end.game_over()
+        # m = menu.Menu(self.screen)
+        # m.game_over()
+
     def getTerrain(self):
         return self.terrain
