@@ -3,6 +3,7 @@ from hud import HUD
 from player import Player
 from terrain import Terrain
 from environment import Environment
+from gameover import GameOver
 
 
 class Game:
@@ -47,3 +48,6 @@ class Game:
 
     def gameOver(self):
         print("t nul")
+        end = GameOver(self.screen)
+        end.game_over()
+
