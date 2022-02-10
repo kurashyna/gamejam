@@ -94,7 +94,7 @@ class Environment:
     def appearFruit(self):
         while True:
             newFruit = Fruit(self.game.terrain, random.randrange(
-                self.groundrect.left, self.groundrect.right), random.randrange(self.groundrect.top, self.groundrect.bottom), 1, random.randrange(0, 3))
+                self.groundrect.left, self.groundrect.right), random.randrange(self.groundrect.top, self.groundrect.bottom), 1, self.dayOrNight)
             if not self.fruitIsColliding(newFruit):
                 break
         self.game.terrain.fruits.append(newFruit)

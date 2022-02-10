@@ -11,9 +11,13 @@ class TerrainElement(ABC):  # abstract class
         self.filename = filename
         # self.image = pygame.image.load(self.folder + self.filename)
         self.scale = scale
-        self.toggleSprite("night")
+        self.toggleSprite(self.nightOrDay())
+
         # self.setScale(self.scale)  # change the size of the object
         self.rect = self.image.get_rect(x=x, y=y)
+
+    def nightOrDay(self):
+        return "night"  # asteroids and lazers always fall at night so it defaults to night
 
     def move(self, xDirection, yDirection):
         self.rect.move_ip(xDirection, yDirection)
@@ -55,20 +59,22 @@ class Obstacle(TerrainElement):
 
 
 class Fruit(TerrainElement):
-    randomfruit = 1
-
-    def __init__(self, terrain, x, y, scale, randomfruit):
-        self.randomfruit = randomfruit
+    def __init__(self, terrain, x, y, scale, dayOrNight):
+        self.dayOrNight = dayOrNight
+        self.randomfruit = random.randrange(0, 3)
         self.terrain = terrain
         folder = "assets/sprites/png/terrain/fruits/"
-        if randomfruit == 0:
+        if self.randomfruit == 0:
             filename = "pear"
-        elif randomfruit == 1:
+        elif self.randomfruit == 1:
             filename = "apple"
-        elif randomfruit == 2:
+        elif self.randomfruit == 2:
             filename = "cherry"
 
         TerrainElement.__init__(self, x, y, scale, folder, filename)
+
+    def nightOrDay(self):
+        return self.dayOrNight
 
     def update(self, player):
         if self.rect.colliderect(player.rect):
