@@ -1,16 +1,19 @@
 import pygame
+# from gameover import GameOver
 from hud import HUD
+# from introduction import Intro
 from player import Player
 from terrain import Terrain
 from environment import Environment
-import menu
-import shelve
+# import menu
+# import shelve
 
 
 
 class Game:
 
-    def __init__(self, screen):  # constructeur
+    def __init__(self, screen, menu):  # constructeur
+        self.menu = menu
         self.screen = screen
         self.running = True
         self.clock = pygame.time.Clock()
@@ -57,8 +60,11 @@ class Game:
         # file.close()
 
         # print("t nul")
-        m = menu.Menu(self.screen)
-        m.game_over()
+        
+        self.menu.game_over()
+
+        pygame.quit() #quit the intro when starting the game
+
 
     def getTerrain(self):
         return self.terrain

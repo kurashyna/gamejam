@@ -37,7 +37,7 @@ class GameOver:
             quit_button.update(self.screen)
 
             # instancie menu
-            menu = Menu(self.screen)
+            # menu = Menu(self.screen)
             # on verifie quel bouton à été cliqué
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:

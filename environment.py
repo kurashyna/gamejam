@@ -1,6 +1,5 @@
 from asyncio.windows_events import NULL
 import random
-from turtle import screensize
 import pygame
 
 from terrain import Terrain
