@@ -5,8 +5,25 @@ class Player:
     def __init__(self, game, x, y):
         self.game = game
         self.hud = game.hud
+        assetFolder = "assets/sprites/png/characters/"
+        self.scale = 1
         self.image = pygame.image.load(
             "assets/sprites/png/characters/knight.png")
+        self.size = self.image.get_size()  # obtient la taille de l'image
+        self.animations = {
+            "forward": [],
+            "backward": [],
+            "left": [],
+            "right": [],
+        }
+        for key in self.animations:
+            for i in range(4):
+                self.animations[key].append(pygame.image.load(
+                    assetFolder + "knight_" + key + "_" + str(i) + ".png"))
+
+        self.currentAnimationFrame = 0
+        self.delayBetweenFrames = 100
+        self.lastTimeFrameChanged = 0
         self.rect = self.image.get_rect(x=x, y=y)
         self.speed = 10
         self.currentSpeed = self.speed
@@ -19,6 +36,11 @@ class Player:
         self.bounceMoment = 0
         self.maxHP = 4
         self.currentHP = self.maxHP  # start with healthbar full
+
+    # virtual methods
+    def setScale(self):
+        self.image = pygame.transform.scale(self.image, (int(
+            self.size[0]*self.scale), int(self.size[1]*self.scale)))  # multiplie la taille de x et y par 5
 
     def handle_events(self, event):
         if not self.isBouncing:  # to prevent going out of bound
@@ -37,6 +59,7 @@ class Player:
                     self.dash()
 
     def update(self):
+        currentTime = pygame.time.get_ticks()
         if self.isDashing:
             if pygame.time.get_ticks() > self.dashUseMoment + 300:
                 self.currentSpeed = self.speed
@@ -44,7 +67,28 @@ class Player:
         if self.isBouncing:
             if pygame.time.get_ticks() > self.bounceMoment + 20:
                 self.isBouncing = False
+        # animation
 
+        if currentTime > self.lastTimeFrameChanged + self.delayBetweenFrames:
+            # direction
+            if self.velocity[1] > 0:
+                direction = "forward"
+            elif self.velocity[1] < 0:
+                direction = "backward"
+            elif self.velocity[0] > 0:
+                direction = "right"
+            else:
+                direction = "left"
+            if self.currentAnimationFrame == len(self.animations["forward"]) - 1:
+                self.currentAnimationFrame = 0
+            else:
+                self.currentAnimationFrame += 1
+            # change frame
+            self.image = self.animations[direction][self.currentAnimationFrame]
+            self.setScale()
+            self.lastTimeFrameChanged = currentTime
+
+        # movement
         self.move()
 
     def move(self):

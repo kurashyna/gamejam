@@ -109,7 +109,6 @@ class Smoke(TerrainElement):
     def update(self, player):
         if pygame.time.get_ticks() > self.lastTimeFrameChanged + 83:
             if self.currentFrame == 5:
-                self.currentFrame = 0
                 self.terrain.effects.remove(self)
             else:
                 self.currentFrame += 1
